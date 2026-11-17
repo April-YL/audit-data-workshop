@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "name": "通用 JE/TB 对拍组合",
+  "nodes": [
+    {
+      "id": "je_source",
+      "kind": "source",
+      "version": 1,
+      "label": "JE 输入",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "source_key": "JE"
+      }
+    },
+    {
+      "id": "je_map",
+      "kind": "map",
+      "version": 1,
+      "label": "JE 字段映射",
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "config": {
+        "source_key": "JE",
+        "fields": [
+          "account_code",
+          "debit_raw",
+          "credit_raw"
+        ]
+      }
+    },
+    {
+      "id": "je_decimal",
+      "kind": "decimal",
+      "version": 1,
+      "label": "JE 金额转换",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "config": {
+        "fields": [
+          {
+            "source": "debit_raw",
+            "target": "debit"
+          },
+          {
+            "source": "credit_raw",
+            "target": "credit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "je_net",
+      "kind": "derive",
+      "version": 1,
+      "label": "JE 净额",
+      "position": {
+        "x": 600,
+        "y": 0
+      },
+      "config": {
+        "expression": "[debit]-[credit]",
+        "target": "net"
+      }
+    },
+    {
+      "id": "je_mark",
+      "kind": "mark",
+      "version": 1,
+      "label": "科目标记",
+      "position": {
+        "x": 800,
+        "y": 0
+      },
+      "config": {
+        "field": "account_code",
+        "target": "selected",
+        "values": [
+          "6602",
+          "6603"
+        ]
+      }
+    },
+    {
+      "id": "je_filter",
+      "kind": "filter",
+      "version": 1,
+      "label": "目标科目",
+      "position": {
+        "x": 1000,
+        "y": 0
+      },
+      "config": {
+        "field": "selected"
+      }
+    },
+    {
+      "id": "je_group",
+      "kind": "aggregate",
+      "version": 1,
+      "label": "JE 汇总",
+      "position": {
+        "x": 1200,
+        "y": 0
+      },
+      "config": {
+        "keys": [
+          "company",
+          "account_code"
+        ],
+        "amount": "net",
+        "target": "amount"
+      }
+    },
+    {
+      "id": "tb_source",
+      "kind": "source",
+      "version": 1,
+      "label": "TB 输入",
+      "position": {
+        "x": 0,
+        "y": 250
+      },
+      "config": {
+        "source_key": "TB"
+      }
+    },
+    {
+      "id": "tb_map",
+      "kind": "map",
+      "version": 1,
+      "label": "TB 字段映射",
+      "position": {
+        "x": 200,
+        "y": 250
+      },
+      "config": {
+        "source_key": "TB",
+        "fields": [
+          "account_code",
+          "debit_raw",
+          "credit_raw"
+        ]
+      }
+    },
+    {
+      "id": "tb_decimal",
+      "kind": "decimal",
+      "version": 1,
+      "label": "TB 金额转换",
+      "position": {
+        "x": 400,
+        "y": 250
+      },
+      "config": {
+        "fields": [
+          {
+            "source": "debit_raw",
+            "target": "debit"
+          },
+          {
+            "source": "credit_raw",
+            "target": "credit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tb_net",
+      "kind": "derive",
+      "version": 1,
+      "label": "TB 净额",
+      "position": {
+        "x": 600,
+        "y": 250
+      },
+      "config": {
+        "expression": "[debit]-[credit]",
+        "target": "net"
+      }
+    },
+    {
+      "id": "tb_group",
+      "kind": "aggregate",
+      "version": 1,
+      "label": "TB 汇总",
+      "position": {
+        "x": 800,
+        "y": 250
+      },
+      "config": {
+        "keys": [
+          "company",
+          "account_code"
+        ],
+        "amount": "net",
+        "target": "amount"
+      }
+    },
+    {
+      "id": "compare",
+      "kind": "join",
+      "version": 1,
+      "label": "按公司与科目核对",
+      "position": {
+        "x": 1400,
+        "y": 125
+      },
+      "config": {
+        "left_id": "je_group",
+        "right_id": "tb_group",
+        "keys": [
+          "company",
+          "account_code"
+        ],
+        "left_amount": "amount",
+        "right_amount": "amount",
+        "issue_sources": [
+          "je_decimal",
+          "tb_decimal"
+        ]
+      }
+    },
+    {
+      "id": "check",
+      "kind": "inspect",
+      "version": 1,
+      "label": "结果检查",
+      "position": {
+        "x": 1600,
+        "y": 125
+      },
+      "config": {}
+    },
+    {
+      "id": "output",
+      "kind": "export",
+      "version": 1,
+      "label": "导出核对表",
+      "position": {
+        "x": 1800,
+        "y": 125
+      },
+      "config": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "source": "je_source",
+      "target": "je_map"
+    },
+    {
+      "id": "e1",
+      "source": "je_map",
+      "target": "je_decimal"
+    },
+    {
+      "id": "e2",
+      "source": "je_decimal",
+      "target": "je_net"
+    },
+    {
+      "id": "e3",
+      "source": "je_net",
+      "target": "je_mark"
+    },
+    {
+      "id": "e4",
+      "source": "je_mark",
+      "target": "je_filter"
+    },
+    {
+      "id": "e5",
+      "source": "je_filter",
+      "target": "je_group"
+    },
+    {
+      "id": "e6",
+      "source": "tb_source",
+      "target": "tb_map"
+    },
+    {
+      "id": "e7",
+      "source": "tb_map",
+      "target": "tb_decimal"
+    },
+    {
+      "id": "e8",
+      "source": "tb_decimal",
+      "target": "tb_net"
+    },
+    {
+      "id": "e9",
+      "source": "tb_net",
+      "target": "tb_group"
+    },
+    {
+      "id": "e10",
+      "source": "je_group",
+      "target": "compare"
+    },
+    {
+      "id": "e11",
+      "source": "tb_group",
+      "target": "compare"
+    },
+    {
+      "id": "e12",
+      "source": "compare",
+      "target": "check"
+    },
+    {
+      "id": "e13",
+      "source": "check",
+      "target": "output"
+    }
+  ]
+}

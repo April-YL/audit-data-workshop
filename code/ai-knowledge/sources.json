@@ -1,0 +1,954 @@
+{
+  "schema_version": 1,
+  "package_version": "0.1.0",
+  "updated_at": "2026-10-29",
+  "status": "knowledge_draft_not_runtime_integrated",
+  "sources": [
+    {
+      "id": "src.design",
+      "title": "通用数据处理知识设计",
+      "publisher": "本项目",
+      "source_type": "design",
+      "jurisdiction": "neutral",
+      "framework": "processing",
+      "version": "0.1.0",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "docs/ai/01_知识架构与边界.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "本轮获准架构、通用约束及方法设计",
+      "verification_status": "project_design",
+      "license_status": "project_authored",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.local-contract",
+      "title": "技术架构与节点契约",
+      "publisher": "本项目",
+      "source_type": "local_document",
+      "jurisdiction": "neutral",
+      "framework": "processing",
+      "version": "2026-10-26",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "docs/06_技术架构与节点契约.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "第4—7节；仅提取来源、精度、异常和参数约束",
+      "verification_status": "local_reviewed",
+      "license_status": "local_reference_only",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "local_sha256": "0163e7ea60b21a74ac7c80c0354b266f5476d2c86ad4ecaf735466e1b5af6162",
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.local-reading",
+      "title": "结构读取实现",
+      "publisher": "本项目",
+      "source_type": "local_code",
+      "jurisdiction": "neutral",
+      "framework": "processing",
+      "version": "working_tree",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "code/desktop/src-tauri/src/source_structure.rs",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "fields函数：多层表头、合并区域、重复与保留列名校验",
+      "verification_status": "local_reviewed",
+      "license_status": "local_reference_only",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "local_sha256": "c5d5227e47d54c1d8c37d2b15ac23bde6a0588337cdb4e31e7b4da890c4e459f",
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.local-input",
+      "title": "已有业务项目输入契约",
+      "publisher": "工作区已有成果",
+      "source_type": "local_document",
+      "jurisdiction": "project_specific",
+      "framework": "project_policy",
+      "version": "working_tree",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "workspace:应付账款函证抽样/skill/ap-confirmation-sampling/references/input-contract.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "mapping.json及字段、身份、科目与补充资料映射限制；不采用业务名单与比例",
+      "verification_status": "local_reviewed",
+      "license_status": "local_reference_only",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "local_sha256": "852fc6efef61f612ed9bf0a7b44ee81e00eaf9f642cd0864056f82bae748014d",
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.cas-basic",
+      "title": "企业会计准则——基本准则（2014年修正）",
+      "publisher": "财政部",
+      "source_type": "standard",
+      "jurisdiction": "CN",
+      "framework": "CAS",
+      "version": "财政部令33号、76号",
+      "effective_from": "2014-07-23",
+      "effective_to": null,
+      "locator": "https://m.mof.gov.cn/czxw/201407/t20140729_1119494.htm",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "第5、7、11—16、44—47条",
+      "verification_status": "body_reviewed",
+      "license_status": "reference_only_no_fulltext",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.csa1301",
+      "title": "中国注册会计师审计准则第1301号——审计证据",
+      "publisher": "中国注册会计师协会发布",
+      "source_type": "standard",
+      "jurisdiction": "CN",
+      "framework": "CSA",
+      "version": "2022-12-22修订",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://www.cicpa.org.cn/ztzl1/Professional_standards/xxzztx/zyzz/sjzz/202105/P020240412542695263912.pdf",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "第11、13、15条；PDF正文标题已核对，网页解析标题有误",
+      "verification_status": "body_reviewed",
+      "license_status": "reference_only_no_fulltext",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.csa1313",
+      "title": "中国注册会计师审计准则第1313号——分析程序",
+      "publisher": "中国注册会计师协会发布",
+      "source_type": "standard",
+      "jurisdiction": "CN",
+      "framework": "CSA",
+      "version": "2022-12-22修订",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://www.cicpa.org.cn/ztzl1/Professional_standards/xxzztx/zyzz/sjzz/202105/P020240412542529330962.pdf",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "第3、5、7条；以PDF正文而非解析标题识别准则",
+      "verification_status": "body_reviewed",
+      "license_status": "reference_only_no_fulltext",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.isa500",
+      "title": "ISA 500 Audit Evidence（2025手册）",
+      "publisher": "IAASB / IFAC",
+      "source_type": "standard",
+      "jurisdiction": "international",
+      "framework": "ISA",
+      "version": "2025 Volume 1",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://ifacweb.blob.core.windows.net/publicfiles/2025-09/IAASB-2025-Handbook-Volume-1.pdf",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "ISA 500第9段，印刷页365／PDF物理页372；非最新手册完整核查",
+      "verification_status": "body_reviewed",
+      "license_status": "restricted_reference_only",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.iaasb2026",
+      "title": "2026 IAASB Handbook",
+      "publisher": "IAASB",
+      "source_type": "standard_index",
+      "jurisdiction": "international",
+      "framework": "ISA",
+      "version": "2026",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://www.iaasb.org/publications/2026-handbook-international-quality-management-auditing-review-sustainability-and-other-assurance",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "已核实2026-09-30新版发布入口，尚未核对各条文修订",
+      "verification_status": "index_only",
+      "license_status": "restricted_reference_only",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.ifrs-index",
+      "title": "IFRS Accounting Standards Navigator",
+      "publisher": "IFRS Foundation",
+      "source_type": "standard_index",
+      "jurisdiction": "international",
+      "framework": "IFRS",
+      "version": "live_index",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://www.ifrs.org/issued-standards/list-of-standards/",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "官方入口；不作为具体条文依据",
+      "verification_status": "index_only",
+      "license_status": "restricted_reference_only",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.ias21-about",
+      "title": "IAS 21官方概览",
+      "publisher": "IFRS Foundation",
+      "source_type": "official_overview",
+      "jurisdiction": "international",
+      "framework": "IFRS",
+      "version": "About页面2026-10-29访问",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://www.ifrs.org/issued-standards/list-of-standards/ias-21-the-effects-of-changes-in-foreign-exchange-rates/",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "About：功能货币、外币和列报货币；未逐条核对全文及生效条件",
+      "verification_status": "overview_reviewed",
+      "license_status": "restricted_reference_only",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.reconciliation",
+      "title": "reconciliation Skill",
+      "publisher": "Anthropic",
+      "source_type": "external_skill",
+      "jurisdiction": "mixed",
+      "framework": "method",
+      "version": "main_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/anthropics/knowledge-work-plugins/main/finance/skills/reconciliation/SKILL.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "核对资料要求及Reconciling Item Categorization；无固定清账期限沿用",
+      "verification_status": "body_reviewed",
+      "license_status": "Apache-2.0_root_license_reviewed",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.journal",
+      "title": "journal-entry-prep Skill",
+      "publisher": "Anthropic",
+      "source_type": "external_skill",
+      "jurisdiction": "US_or_context_specific",
+      "framework": "method",
+      "version": "main_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/anthropics/knowledge-work-plugins/main/finance/skills/journal-entry-prep/SKILL.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "借贷关系和支持资料；ASC及税务政策不移植",
+      "verification_status": "body_reviewed",
+      "license_status": "Apache-2.0_root_license_reviewed",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.audit-support",
+      "title": "audit-support Skill",
+      "publisher": "Anthropic",
+      "source_type": "external_skill",
+      "jurisdiction": "US",
+      "framework": "SOX",
+      "version": "main_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/anthropics/knowledge-work-plugins/main/finance/skills/audit-support/SKILL.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "SOX定位、记录结构和风险；不采用经验比例及样本规模",
+      "verification_status": "body_reviewed",
+      "license_status": "Apache-2.0_root_license_reviewed",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.anthropic-license",
+      "title": "knowledge-work-plugins LICENSE",
+      "publisher": "Anthropic",
+      "source_type": "license",
+      "jurisdiction": "neutral",
+      "framework": "licensing",
+      "version": "main_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/anthropics/knowledge-work-plugins/main/LICENSE",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "Apache-2.0仓库根许可；不等于所有依赖均核查",
+      "verification_status": "body_reviewed",
+      "license_status": "Apache-2.0_root_license_reviewed",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.kingdee",
+      "title": "kingdee-k3cloud Skill",
+      "publisher": "adamzhang1987社区项目",
+      "source_type": "external_skill",
+      "jurisdiction": "system_specific",
+      "framework": "K3Cloud",
+      "version": "main_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/adamzhang1987/kingdee-k3cloud-skill/main/kingdee-k3cloud/SKILL.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "入口、查询策略；仅参考字段确认方法",
+      "verification_status": "body_reviewed",
+      "license_status": "Apache-2.0_root_license_reviewed",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.kingdee-fields",
+      "title": "K3Cloud verified-fields",
+      "publisher": "adamzhang1987社区项目",
+      "source_type": "external_skill_reference",
+      "jurisdiction": "system_specific",
+      "framework": "K3Cloud",
+      "version": "main_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/adamzhang1987/kingdee-k3cloud-skill/main/kingdee-k3cloud/references/verified-fields.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "销售表头及明细分区、字段子集声明；未连接系统实测",
+      "verification_status": "body_reviewed",
+      "license_status": "Apache-2.0_root_license_reviewed",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.kingdee-custom",
+      "title": "K3Cloud customization-guide",
+      "publisher": "adamzhang1987社区项目",
+      "source_type": "external_skill_reference",
+      "jurisdiction": "system_specific",
+      "framework": "K3Cloud",
+      "version": "main_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/adamzhang1987/kingdee-k3cloud-skill/main/kingdee-k3cloud/references/customization-guide.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "元数据、部署差异；不采用前缀即可断定自定义等未经厂商证实的推断",
+      "verification_status": "body_reviewed",
+      "license_status": "Apache-2.0_root_license_reviewed",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.kingdee-license",
+      "title": "kingdee-k3cloud-skill LICENSE",
+      "publisher": "adamzhang1987",
+      "source_type": "license",
+      "jurisdiction": "neutral",
+      "framework": "licensing",
+      "version": "main_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/adamzhang1987/kingdee-k3cloud-skill/main/LICENSE",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "源码仓库Apache-2.0；其他分发包未核查",
+      "verification_status": "body_reviewed",
+      "license_status": "Apache-2.0_root_license_reviewed",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    },
+    {
+      "id": "src.publisher",
+      "title": "kingdee-skill-publisher",
+      "publisher": "kingdee GitHub组织",
+      "source_type": "external_skill",
+      "jurisdiction": "system_specific",
+      "framework": "Kingdee_Cangqiong",
+      "version": "master_unpinned",
+      "effective_from": null,
+      "effective_to": null,
+      "locator": "https://raw.githubusercontent.com/kingdee/kingdee-skill-publisher/master/SKILL.md",
+      "retrieved_at": "2026-10-29",
+      "reviewed_scope": "入口职责和API发布方向；未审阅所有脚本",
+      "verification_status": "body_reviewed",
+      "license_status": "pending_file_license_review",
+      "reuse_scope": "来源链接、简短原创释义及适用边界；不复制正文或代码",
+      "limitations": [
+        "未证明涵盖所有修订；使用时核对适用期间"
+      ],
+      "snapshot_policy": "本地记录SHA256；网络来源仅访问日期与分支，未固定提交，不声称可复现远程快照"
+    }
+  ],
+  "knowledge_items": [
+    {
+      "id": "k.entity",
+      "title": "主体边界",
+      "summary": "会计报告围绕主体及其交易事项。",
+      "source_refs": [
+        {
+          "source_id": "src.cas-basic",
+          "section": "第5条"
+        }
+      ],
+      "rule_type": "standard_requirement",
+      "applicability": {
+        "frameworks": [
+          "CAS"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "保留公司维度，跨主体合并须说明目的与口径。"
+      ],
+      "concept_refs": [
+        "c.entity"
+      ],
+      "method_refs": [
+        "m.append",
+        "m.join",
+        "m.aggregate"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.period",
+      "title": "期间边界",
+      "summary": "会计信息按期间组织；时点数与期间数含义不同。",
+      "source_refs": [
+        {
+          "source_id": "src.cas-basic",
+          "section": "第7、44—47条"
+        }
+      ],
+      "rule_type": "standard_requirement",
+      "applicability": {
+        "frameworks": [
+          "CAS"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "显式区分期末日期、发生期间及累计范围。"
+      ],
+      "concept_refs": [
+        "c.period",
+        "c.balance",
+        "c.movement"
+      ],
+      "method_refs": [
+        "m.filter",
+        "m.aggregate",
+        "m.reconcile"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.double-entry",
+      "title": "借贷记录",
+      "summary": "企业采用借贷记账；借贷与数值正负是不同信息。",
+      "source_refs": [
+        {
+          "source_id": "src.cas-basic",
+          "section": "第11条"
+        }
+      ],
+      "rule_type": "standard_requirement",
+      "applicability": {
+        "frameworks": [
+          "CAS"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "保留方向；转换符号另由资料规则确认。"
+      ],
+      "concept_refs": [
+        "c.debit",
+        "c.credit",
+        "c.sign"
+      ],
+      "method_refs": [
+        "m.convert",
+        "m.aggregate"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.quality",
+      "title": "信息质量",
+      "summary": "真实、完整、清晰与可比是会计信息质量要求。",
+      "source_refs": [
+        {
+          "source_id": "src.cas-basic",
+          "section": "第12—15条"
+        }
+      ],
+      "rule_type": "standard_requirement",
+      "applicability": {
+        "frameworks": [
+          "CAS"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "保留原值和处理依据；不同口径不能仅靠改名视为一致。"
+      ],
+      "concept_refs": [
+        "c.provenance",
+        "c.exception"
+      ],
+      "method_refs": [
+        "m.structure",
+        "m.map",
+        "m.reconcile"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.evidence-cn",
+      "title": "资料可靠性",
+      "summary": "使用单位生成的信息时，应评价准确性、完整性及详细程度。",
+      "source_refs": [
+        {
+          "source_id": "src.csa1301",
+          "section": "第11、13条"
+        }
+      ],
+      "rule_type": "standard_requirement",
+      "applicability": {
+        "frameworks": [
+          "CSA"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "局部样例不能代替资料完整性检查。"
+      ],
+      "concept_refs": [
+        "c.record",
+        "c.provenance"
+      ],
+      "method_refs": [
+        "m.structure",
+        "m.reconcile"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.conflict-cn",
+      "title": "资料冲突",
+      "summary": "证据不一致或可靠性有疑问时，需要进一步处理。",
+      "source_refs": [
+        {
+          "source_id": "src.csa1301",
+          "section": "第15条"
+        }
+      ],
+      "rule_type": "standard_requirement",
+      "applicability": {
+        "frameworks": [
+          "CSA"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "保留两侧差异，不静默以一侧覆盖另一侧。"
+      ],
+      "concept_refs": [
+        "c.exception"
+      ],
+      "method_refs": [
+        "m.join",
+        "m.reconcile"
+      ],
+      "requires_judgment": [
+        "由专业人员确定追加程序"
+      ],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.analysis-cn",
+      "title": "分析可比性",
+      "summary": "分析程序需考虑数据可靠性、预期精度及可接受差异。",
+      "source_refs": [
+        {
+          "source_id": "src.csa1313",
+          "section": "第3、5、7条"
+        }
+      ],
+      "rule_type": "standard_requirement",
+      "applicability": {
+        "frameworks": [
+          "CSA"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "比较前统一基础，调查异常关系。"
+      ],
+      "concept_refs": [
+        "c.period",
+        "c.unit",
+        "c.currency"
+      ],
+      "method_refs": [
+        "m.aggregate",
+        "m.reconcile"
+      ],
+      "requires_judgment": [
+        "阈值与解释须有依据"
+      ],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.evidence-intl",
+      "title": "国际资料可靠性",
+      "summary": "ISA 500要求评估单位生成的信息是否适于审计用途。",
+      "source_refs": [
+        {
+          "source_id": "src.isa500",
+          "section": "第9段；印刷页365"
+        }
+      ],
+      "rule_type": "standard_requirement",
+      "applicability": {
+        "frameworks": [
+          "ISA"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "检查准确性、完整性和详细程度。"
+      ],
+      "concept_refs": [
+        "c.provenance",
+        "c.record"
+      ],
+      "method_refs": [
+        "m.reconcile"
+      ],
+      "requires_judgment": [
+        "实际采用前复核2026手册及任务期间适用版本"
+      ],
+      "verification_status": "reviewed_historical_version"
+    },
+    {
+      "id": "k.currency-intl",
+      "title": "国际货币概念",
+      "summary": "功能货币、外币和列报货币具有不同含义。",
+      "source_refs": [
+        {
+          "source_id": "src.ias21-about",
+          "section": "About"
+        }
+      ],
+      "rule_type": "guidance_explanation",
+      "applicability": {
+        "frameworks": [
+          "IFRS"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "保留币种角色；换算前确认依据。"
+      ],
+      "concept_refs": [
+        "c.currency",
+        "c.amount"
+      ],
+      "method_refs": [
+        "m.convert",
+        "m.aggregate"
+      ],
+      "requires_judgment": [
+        "汇率、日期、方法及适用修订需另核对"
+      ],
+      "verification_status": "overview_only"
+    },
+    {
+      "id": "k.reconcile-method",
+      "title": "差异归因",
+      "summary": "核对差异可从时间、记录和分类等方面调查。",
+      "source_refs": [
+        {
+          "source_id": "src.reconciliation",
+          "section": "Reconciliation Types / Reconciling Item Categorization"
+        }
+      ],
+      "rule_type": "method_suggestion",
+      "applicability": {
+        "frameworks": [
+          "neutral"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "差异先列为待解释，不根据金额自动下结论。"
+      ],
+      "concept_refs": [
+        "c.match",
+        "c.exception"
+      ],
+      "method_refs": [
+        "m.reconcile"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.supporting",
+      "title": "业务资料关联",
+      "summary": "分录准备通常需要支持性业务资料。",
+      "source_refs": [
+        {
+          "source_id": "src.journal",
+          "section": "Standard Accrual Types / documentation"
+        }
+      ],
+      "rule_type": "method_suggestion",
+      "applicability": {
+        "frameworks": [
+          "neutral"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "凭证和业务单据关系须核实，不能假设一对一。"
+      ],
+      "concept_refs": [
+        "c.document",
+        "c.line",
+        "c.provenance"
+      ],
+      "method_refs": [
+        "m.map",
+        "m.join"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.mapping-evidence",
+      "title": "字段映射依据",
+      "summary": "字段名只提供候选含义，实际字段与归属须确认。",
+      "source_refs": [
+        {
+          "source_id": "src.local-input",
+          "section": "mapping.json及身份核实限制"
+        }
+      ],
+      "rule_type": "method_suggestion",
+      "applicability": {
+        "frameworks": [
+          "neutral"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "同名不证明同义；金额相等不证明归属。"
+      ],
+      "concept_refs": [
+        "c.code",
+        "c.name",
+        "c.entity",
+        "c.period"
+      ],
+      "method_refs": [
+        "m.map",
+        "m.join"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.safe-transform",
+      "title": "通用转换约束",
+      "summary": "处理须明确参数、记录去向和来源。",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—5节"
+        }
+      ],
+      "rule_type": "method_suggestion",
+      "applicability": {
+        "frameworks": [
+          "neutral"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "不静默吞错、填值、改变精度或放大记录。"
+      ],
+      "concept_refs": [
+        "c.exception",
+        "c.provenance"
+      ],
+      "method_refs": [
+        "m.convert",
+        "m.filter",
+        "m.dedupe",
+        "m.append",
+        "m.join",
+        "m.aggregate"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    },
+    {
+      "id": "k.metadata",
+      "title": "部署字段核实",
+      "summary": "系统元数据及实际样例用于确认部署字段。",
+      "source_refs": [
+        {
+          "source_id": "src.kingdee-custom",
+          "section": "发现自定义字段"
+        }
+      ],
+      "rule_type": "method_suggestion",
+      "applicability": {
+        "frameworks": [
+          "K3Cloud"
+        ],
+        "conditions": [
+          "先确认任务背景及资料适用期间"
+        ],
+        "effective_from": null,
+        "effective_to": null
+      },
+      "processing_implications": [
+        "厂商字段只是候选；按部署及导出方式核实。"
+      ],
+      "concept_refs": [
+        "c.code",
+        "c.name",
+        "c.record"
+      ],
+      "method_refs": [
+        "m.map"
+      ],
+      "requires_judgment": [],
+      "verification_status": "reviewed_paraphrase"
+    }
+  ],
+  "pending_topics": [
+    {
+      "topic": "IFRS具体确认计量、IAS 21具体换算规则",
+      "reason": "本轮只核实概览，未提炼具体条文；需要适用版本及授权访问"
+    },
+    {
+      "topic": "ISA 2026正文差异",
+      "reason": "新版入口已核实，尚未逐条对照；2025条目仅标明历史版本"
+    },
+    {
+      "topic": "行业及其他会计体系",
+      "reason": "非本轮首批覆盖，不能推定已支持"
+    }
+  ]
+}

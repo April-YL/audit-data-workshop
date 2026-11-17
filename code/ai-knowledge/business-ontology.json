@@ -1,0 +1,1322 @@
+{
+  "schema_version": 1,
+  "package_version": "0.1.0",
+  "updated_at": "2026-10-29",
+  "status": "knowledge_draft_not_runtime_integrated",
+  "alias_policy": "别名只用于生成候选，必须结合字段组、粒度和资料上下文确认；不得直接触发转换",
+  "concepts": [
+    {
+      "id": "c.file",
+      "label": "文件",
+      "definition": "承载原始资料的独立文件",
+      "aliases": [
+        "源文件",
+        "source file"
+      ],
+      "distinguishing_features": [
+        "不能以文件名证明主体和期间"
+      ],
+      "related_concepts": [
+        "c.sheet"
+      ],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.sheet",
+      "label": "工作表",
+      "definition": "工作簿内一个表格载体",
+      "aliases": [
+        "sheet",
+        "页签"
+      ],
+      "distinguishing_features": [
+        "一个工作表可能含多个数据区域"
+      ],
+      "related_concepts": [
+        "c.detail-region",
+        "c.file"
+      ],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.header",
+      "label": "表头",
+      "definition": "描述物理列含义的一行或多行",
+      "aliases": [
+        "列标题",
+        "header"
+      ],
+      "distinguishing_features": [
+        "标题、单位行不一定属于字段名"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.header"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.detail-region",
+      "label": "明细区域",
+      "definition": "按确定边界读取的明细记录区",
+      "aliases": [
+        "数据区",
+        "detail range"
+      ],
+      "distinguishing_features": [
+        "不得把尾部合计重复计入"
+      ],
+      "related_concepts": [
+        "c.sheet"
+      ],
+      "constraints": [
+        "x.header"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.total-row",
+      "label": "合计行",
+      "definition": "对若干记录汇总的展示行",
+      "aliases": [
+        "小计",
+        "总计"
+      ],
+      "distinguishing_features": [
+        "不得仅凭包含合计文字删除"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.header"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.record",
+      "label": "记录",
+      "definition": "某一明确粒度的数据实例",
+      "aliases": [
+        "行",
+        "row"
+      ],
+      "distinguishing_features": [
+        "物理行和业务记录未必一一对应"
+      ],
+      "related_concepts": [
+        "c.aggregate-record",
+        "c.entity",
+        "c.grain",
+        "c.key",
+        "c.period",
+        "c.provenance"
+      ],
+      "constraints": [
+        "x.trace"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.document",
+      "label": "业务单据",
+      "definition": "具有身份和业务含义的单据对象",
+      "aliases": [
+        "凭证",
+        "单据",
+        "document"
+      ],
+      "distinguishing_features": [
+        "单据号可能仅在主体期间类别内唯一"
+      ],
+      "related_concepts": [
+        "c.line"
+      ],
+      "constraints": [
+        "x.duplicate"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.line",
+      "label": "单据明细",
+      "definition": "单据下的业务或分录条目",
+      "aliases": [
+        "分录",
+        "entry line"
+      ],
+      "distinguishing_features": [
+        "同一单据的多条明细不自动构成重复"
+      ],
+      "related_concepts": [
+        "c.document"
+      ],
+      "constraints": [
+        "x.duplicate"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.aggregate-record",
+      "label": "汇总记录",
+      "definition": "按确定维度由明细汇成的记录",
+      "aliases": [
+        "汇总行",
+        "group"
+      ],
+      "distinguishing_features": [
+        "相同显示值不证明相同组"
+      ],
+      "related_concepts": [
+        "c.record"
+      ],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.entity",
+      "label": "主体",
+      "definition": "资料所属的公司或核算组织",
+      "aliases": [
+        "公司",
+        "账套",
+        "entity"
+      ],
+      "distinguishing_features": [
+        "公司、账套和合并范围不能自动等同"
+      ],
+      "related_concepts": [
+        "c.record"
+      ],
+      "constraints": [
+        "x.scope"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.period",
+      "label": "期间",
+      "definition": "发生范围或报告时点及其口径",
+      "aliases": [
+        "会计期间",
+        "年度",
+        "period"
+      ],
+      "distinguishing_features": [
+        "月度、年累计和期末不能混用"
+      ],
+      "related_concepts": [
+        "c.record"
+      ],
+      "constraints": [
+        "x.scope",
+        "x.balance"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.account",
+      "label": "科目",
+      "definition": "在特定科目体系内分类核算的对象",
+      "aliases": [
+        "会计科目",
+        "account"
+      ],
+      "distinguishing_features": [
+        "科目代码跨主体可能不同义"
+      ],
+      "related_concepts": [],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.counterparty",
+      "label": "往来对象",
+      "definition": "与主体发生业务的客户供应商等对象",
+      "aliases": [
+        "客商",
+        "客户",
+        "供应商",
+        "counterparty"
+      ],
+      "distinguishing_features": [
+        "名称相同不自动是同一对象"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.identity"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.department",
+      "label": "部门",
+      "definition": "特定组织体系中的管理维度",
+      "aliases": [
+        "成本中心",
+        "department"
+      ],
+      "distinguishing_features": [
+        "部门与成本中心只是候选别名并非必然等同"
+      ],
+      "related_concepts": [],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.currency",
+      "label": "币种",
+      "definition": "金额货币单位及其原币、本位或列报角色",
+      "aliases": [
+        "货币",
+        "currency"
+      ],
+      "distinguishing_features": [
+        "货币角色与换算日期必须保留"
+      ],
+      "related_concepts": [
+        "c.amount"
+      ],
+      "constraints": [
+        "x.amount"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.unit",
+      "label": "计量单位",
+      "definition": "数值的量纲及倍率",
+      "aliases": [
+        "元",
+        "万元",
+        "unit"
+      ],
+      "distinguishing_features": [
+        "倍率换算须明确，数量与金额不混加"
+      ],
+      "related_concepts": [
+        "c.amount"
+      ],
+      "constraints": [
+        "x.amount"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.code",
+      "label": "编码",
+      "definition": "用于识别对象的文本标识",
+      "aliases": [
+        "编号",
+        "代码",
+        "code"
+      ],
+      "distinguishing_features": [
+        "保留前导零，不默认数值化"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.code",
+        "x.identity"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.name",
+      "label": "名称",
+      "definition": "供人阅读的对象标签",
+      "aliases": [
+        "名称",
+        "name"
+      ],
+      "distinguishing_features": [
+        "不能默认作为唯一键"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.identity"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.date",
+      "label": "日期",
+      "definition": "带有业务角色的日期或时间",
+      "aliases": [
+        "记账日期",
+        "业务日期",
+        "date"
+      ],
+      "distinguishing_features": [
+        "业务、记账、导出日期分别解释"
+      ],
+      "related_concepts": [],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.amount",
+      "label": "金额",
+      "definition": "带口径币种单位方向的数值",
+      "aliases": [
+        "金额",
+        "amount"
+      ],
+      "distinguishing_features": [
+        "原值、精度、异常必须分开"
+      ],
+      "related_concepts": [
+        "c.currency",
+        "c.unit"
+      ],
+      "constraints": [
+        "x.amount",
+        "x.null",
+        "x.precision"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.balance",
+      "label": "余额",
+      "definition": "某时点按确定口径形成的存量金额",
+      "aliases": [
+        "期初余额",
+        "期末余额",
+        "balance"
+      ],
+      "distinguishing_features": [
+        "不可将逐月期末余额直接相加当年发生额"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.balance"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.movement",
+      "label": "发生额",
+      "definition": "特定期间内的流量金额",
+      "aliases": [
+        "本期发生",
+        "累计发生",
+        "movement"
+      ],
+      "distinguishing_features": [
+        "本期与累计要明确"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.balance"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.debit",
+      "label": "借方",
+      "definition": "借贷记账中的借方维度",
+      "aliases": [
+        "借方金额",
+        "debit"
+      ],
+      "distinguishing_features": [
+        "不全局等于正数或增加"
+      ],
+      "related_concepts": [],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.credit",
+      "label": "贷方",
+      "definition": "借贷记账中的贷方维度",
+      "aliases": [
+        "贷方金额",
+        "credit"
+      ],
+      "distinguishing_features": [
+        "不全局等于负数或减少"
+      ],
+      "related_concepts": [],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.sign",
+      "label": "金额方向",
+      "definition": "来源金额的正负和借贷表示规则",
+      "aliases": [
+        "方向",
+        "红字",
+        "sign convention"
+      ],
+      "distinguishing_features": [
+        "红字和借贷方向不能凭名称推断"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.amount"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.key",
+      "label": "唯一键",
+      "definition": "在指定范围内区分记录或对象的字段集合",
+      "aliases": [
+        "主键",
+        "unique key"
+      ],
+      "distinguishing_features": [
+        "必须验证实际唯一性和空值"
+      ],
+      "related_concepts": [
+        "c.composite-key",
+        "c.record"
+      ],
+      "constraints": [
+        "x.join"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.composite-key",
+      "label": "复合键",
+      "definition": "由多个明确字段组合的匹配身份",
+      "aliases": [
+        "组合键",
+        "compound key"
+      ],
+      "distinguishing_features": [
+        "拼接须保留边界，不简单串接字符串"
+      ],
+      "related_concepts": [
+        "c.key"
+      ],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.duplicate",
+      "label": "重复",
+      "definition": "按明确比较字段与范围判定的等价记录",
+      "aliases": [
+        "重复行",
+        "duplicate"
+      ],
+      "distinguishing_features": [
+        "相同金额不自动构成重复"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.duplicate"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.null",
+      "label": "缺失值",
+      "definition": "未提供或未知的值及其原因",
+      "aliases": [
+        "空白",
+        "NULL",
+        "missing"
+      ],
+      "distinguishing_features": [
+        "零、空字符串和缺失不自动等同"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.null"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.match",
+      "label": "匹配",
+      "definition": "按明确规则建立的两侧记录关系",
+      "aliases": [
+        "关联",
+        "match"
+      ],
+      "distinguishing_features": [
+        "需要明确一对一、一对多或多对多"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.join"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.unmatched",
+      "label": "未匹配",
+      "definition": "在指定关联方向找不到对应记录",
+      "aliases": [
+        "落单",
+        "unmatched"
+      ],
+      "distinguishing_features": [
+        "不能静默丢弃"
+      ],
+      "related_concepts": [],
+      "constraints": [],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.exception",
+      "label": "异常",
+      "definition": "不能按当前规则正常处理的记录或条件",
+      "aliases": [
+        "错误",
+        "exception"
+      ],
+      "distinguishing_features": [
+        "资料异常与程序失败分开"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.policy"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.provenance",
+      "label": "来源位置",
+      "definition": "定位输入及参与转换的来源关系",
+      "aliases": [
+        "原始行",
+        "lineage",
+        "source position"
+      ],
+      "distinguishing_features": [
+        "局部预览不能替代完整来源链"
+      ],
+      "related_concepts": [
+        "c.record"
+      ],
+      "constraints": [
+        "x.trace"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.data-type",
+      "label": "数据类型",
+      "definition": "字段表达方式和解析约束",
+      "aliases": [
+        "文本",
+        "日期",
+        "定点数",
+        "type"
+      ],
+      "distinguishing_features": [
+        "类型转换需要政策而非外观猜测"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.code",
+        "x.precision"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.grain",
+      "label": "记录粒度",
+      "definition": "一条记录代表的业务单位与维度组合",
+      "aliases": [
+        "粒度",
+        "grain"
+      ],
+      "distinguishing_features": [
+        "一侧单据另一侧明细会导致关联重复"
+      ],
+      "related_concepts": [
+        "c.record"
+      ],
+      "constraints": [
+        "x.join"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    },
+    {
+      "id": "c.rule-scope",
+      "label": "规则适用范围",
+      "definition": "规则所属地区体系期间项目与条件",
+      "aliases": [
+        "口径",
+        "scope"
+      ],
+      "distinguishing_features": [
+        "经验或项目约定不能标为普遍准则"
+      ],
+      "related_concepts": [],
+      "constraints": [
+        "x.scope",
+        "x.policy"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "业务语义：工作定义"
+        }
+      ],
+      "verification_status": "project_working_definition"
+    }
+  ],
+  "relations": [
+    {
+      "id": "r.contains-sheet",
+      "from_concept": "c.file",
+      "to_concept": "c.sheet",
+      "predicate": "包含",
+      "conditions": [
+        "同一工作簿内"
+      ],
+      "cardinality": "one_to_many",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.contains-region",
+      "from_concept": "c.sheet",
+      "to_concept": "c.detail-region",
+      "predicate": "包含",
+      "conditions": [
+        "区域由明确边界识别"
+      ],
+      "cardinality": "one_to_many",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.contains-lines",
+      "from_concept": "c.document",
+      "to_concept": "c.line",
+      "predicate": "包含",
+      "conditions": [
+        "单据身份与分录号均核实"
+      ],
+      "cardinality": "one_to_many",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.belongs-entity",
+      "from_concept": "c.record",
+      "to_concept": "c.entity",
+      "predicate": "归属",
+      "conditions": [
+        "明确主体证据"
+      ],
+      "cardinality": "many_to_one",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.belongs-period",
+      "from_concept": "c.record",
+      "to_concept": "c.period",
+      "predicate": "归属",
+      "conditions": [
+        "明确日期或期间口径"
+      ],
+      "cardinality": "many_to_one",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.amount-currency",
+      "from_concept": "c.amount",
+      "to_concept": "c.currency",
+      "predicate": "采用",
+      "conditions": [
+        "原币及本位币分别绑定"
+      ],
+      "cardinality": "many_to_one",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.amount-unit",
+      "from_concept": "c.amount",
+      "to_concept": "c.unit",
+      "predicate": "采用",
+      "conditions": [
+        "单位与倍率已核实"
+      ],
+      "cardinality": "many_to_one",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.has-grain",
+      "from_concept": "c.record",
+      "to_concept": "c.grain",
+      "predicate": "具有",
+      "conditions": [
+        "关联及汇总前确认"
+      ],
+      "cardinality": "many_to_one",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.aggregate-members",
+      "from_concept": "c.aggregate-record",
+      "to_concept": "c.record",
+      "predicate": "汇总来源",
+      "conditions": [
+        "保留分组键及成员关系"
+      ],
+      "cardinality": "many_to_many",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.trace",
+      "from_concept": "c.record",
+      "to_concept": "c.provenance",
+      "predicate": "可追溯",
+      "conditions": [
+        "CSV逻辑记录号与物理起始行分开"
+      ],
+      "cardinality": "many_to_many",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.identifies",
+      "from_concept": "c.key",
+      "to_concept": "c.record",
+      "predicate": "识别",
+      "conditions": [
+        "只在指定主体期间范围成立"
+      ],
+      "cardinality": "conditional_one_to_one",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    },
+    {
+      "id": "r.composed",
+      "from_concept": "c.composite-key",
+      "to_concept": "c.key",
+      "predicate": "扩展",
+      "conditions": [
+        "组成字段与空值政策明确"
+      ],
+      "cardinality": "conditional",
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "关系设计"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "x.scope",
+      "concept_refs": [
+        "c.entity",
+        "c.period",
+        "c.rule-scope"
+      ],
+      "rule": "合并处理前明确主体、期间和适用体系",
+      "on_violation": "缺失时询问；有冲突时停止受影响部分",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.code",
+      "concept_refs": [
+        "c.code",
+        "c.data-type"
+      ],
+      "rule": "标识字段默认按文本保存原貌",
+      "on_violation": "数值化或补零须显式规则",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.amount",
+      "concept_refs": [
+        "c.amount",
+        "c.currency",
+        "c.unit",
+        "c.sign"
+      ],
+      "rule": "金额比较和汇总前核对口径币种单位方向",
+      "on_violation": "未知时分组隔离，不猜汇率符号",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.null",
+      "concept_refs": [
+        "c.null",
+        "c.amount"
+      ],
+      "rule": "缺失、无效与零分别表示",
+      "on_violation": "不自动补零",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.duplicate",
+      "concept_refs": [
+        "c.duplicate",
+        "c.document",
+        "c.line"
+      ],
+      "rule": "先确定判重字段与保留顺序",
+      "on_violation": "不默认删除同凭证明细",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.join",
+      "concept_refs": [
+        "c.key",
+        "c.match",
+        "c.grain"
+      ],
+      "rule": "关联先校验空键、重复键和基数",
+      "on_violation": "不静默产生多对多金额放大",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.balance",
+      "concept_refs": [
+        "c.balance",
+        "c.movement",
+        "c.period"
+      ],
+      "rule": "存量与流量分别解释",
+      "on_violation": "跨期间不把余额简单相加",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.trace",
+      "concept_refs": [
+        "c.provenance",
+        "c.record"
+      ],
+      "rule": "记录变换保留来源",
+      "on_violation": "汇总保留成员关系，关联保留两侧来源",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.precision",
+      "concept_refs": [
+        "c.data-type",
+        "c.amount"
+      ],
+      "rule": "解析精度及舍入方式须明确",
+      "on_violation": "超精度、无效格式保留异常原值",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.header",
+      "concept_refs": [
+        "c.header",
+        "c.detail-region",
+        "c.total-row"
+      ],
+      "rule": "结构识别是待确认候选",
+      "on_violation": "不自动补普通空白或删除合计",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.identity",
+      "concept_refs": [
+        "c.counterparty",
+        "c.code",
+        "c.name"
+      ],
+      "rule": "别名仅作候选身份",
+      "on_violation": "不因近似名称或金额相等自动合并",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    },
+    {
+      "id": "x.policy",
+      "concept_refs": [
+        "c.rule-scope",
+        "c.exception"
+      ],
+      "rule": "规则必须有适用条件和身份",
+      "on_violation": "准则、指南、方法、项目约定分开",
+      "rule_type": "method_suggestion",
+      "source_refs": [
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.design",
+          "section": "通用处理约束"
+        }
+      ]
+    }
+  ]
+}

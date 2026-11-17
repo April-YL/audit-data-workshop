@@ -1,0 +1,691 @@
+{
+  "schema_version": 1,
+  "package_version": "0.1.0",
+  "updated_at": "2026-10-29",
+  "status": "knowledge_draft_not_runtime_integrated",
+  "document_profiles": [
+    {
+      "id": "d.journal",
+      "title": "序时及分录明细",
+      "grain": "一条分录或业务明细",
+      "recognition_features": [
+        "单据身份和行身份",
+        "借贷或带方向金额",
+        "日期和科目"
+      ],
+      "field_mappings": [
+        {
+          "source_field_candidates": [
+            "凭证号",
+            "单据编号"
+          ],
+          "concept_ref": "c.document",
+          "role": "单据身份",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "结合主体期间类别"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "行号",
+            "分录号"
+          ],
+          "concept_ref": "c.line",
+          "role": "明细身份",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "核实业务行含义"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "科目编码",
+            "账户代码"
+          ],
+          "concept_ref": "c.code",
+          "role": "科目标识",
+          "data_type": "text",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "科目体系一致"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "借方金额"
+          ],
+          "concept_ref": "c.debit",
+          "role": "发生额",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "本期或累计待确认"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "贷方金额"
+          ],
+          "concept_ref": "c.credit",
+          "role": "发生额",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "红字处理待确认"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        }
+      ],
+      "required_questions": [
+        "一行是什么粒度？",
+        "日期是业务还是记账日期？",
+        "单据身份在哪个范围唯一？"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "资料类型设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—5节"
+        }
+      ],
+      "validation_status": "generic_reference_not_file_validated",
+      "applicability": "仅作识别候选；没有给定文件时不固定物理行列",
+      "caveats": [
+        "标题及字段名不能单独证明归属和含义",
+        "不推断特定厂商报表已受支持"
+      ]
+    },
+    {
+      "id": "d.balance",
+      "title": "科目余额资料",
+      "grain": "主体期间科目及辅助维度的余额",
+      "recognition_features": [
+        "期初、本期、期末字段组",
+        "借贷方向或带符号数值"
+      ],
+      "field_mappings": [
+        {
+          "source_field_candidates": [
+            "期初余额"
+          ],
+          "concept_ref": "c.balance",
+          "role": "期初时点",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "方向、币种与单位需确认"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "期末余额"
+          ],
+          "concept_ref": "c.balance",
+          "role": "期末时点",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "不得当作期间发生额"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "本期发生额"
+          ],
+          "concept_ref": "c.movement",
+          "role": "期间流量",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "本期与累计分开"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "币种"
+          ],
+          "concept_ref": "c.currency",
+          "role": "货币维度",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "原币与本位币分开"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        }
+      ],
+      "required_questions": [
+        "是否包含科目层级汇总行？",
+        "辅助维度与科目总额是否重叠？",
+        "期初与期末方向如何表示？"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "资料类型设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—5节"
+        }
+      ],
+      "validation_status": "generic_reference_not_file_validated",
+      "applicability": "仅作识别候选；没有给定文件时不固定物理行列",
+      "caveats": [
+        "标题及字段名不能单独证明归属和含义",
+        "不推断特定厂商报表已受支持"
+      ]
+    },
+    {
+      "id": "d.master",
+      "title": "对象主数据",
+      "grain": "每个业务对象一条或多个版本",
+      "recognition_features": [
+        "对象编码与名称",
+        "生效日期或版本可选"
+      ],
+      "field_mappings": [
+        {
+          "source_field_candidates": [
+            "客户编码",
+            "供应商编码",
+            "对象编号"
+          ],
+          "concept_ref": "c.code",
+          "role": "对象标识",
+          "data_type": "text",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "核实编码域和主数据版本"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "名称",
+            "客户名称"
+          ],
+          "concept_ref": "c.name",
+          "role": "展示名称",
+          "data_type": "text",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "不作为默认唯一键"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        }
+      ],
+      "required_questions": [
+        "编码是否跨公司共享？",
+        "是否有历史版本和停用记录？"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "资料类型设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—5节"
+        }
+      ],
+      "validation_status": "generic_reference_not_file_validated",
+      "applicability": "仅作识别候选；没有给定文件时不固定物理行列",
+      "caveats": [
+        "标题及字段名不能单独证明归属和含义",
+        "不推断特定厂商报表已受支持"
+      ]
+    },
+    {
+      "id": "d.ledger",
+      "title": "业务台账",
+      "grain": "业务对象、事项或事项明细",
+      "recognition_features": [
+        "对象、日期、状态和指标列"
+      ],
+      "field_mappings": [
+        {
+          "source_field_candidates": [
+            "业务日期"
+          ],
+          "concept_ref": "c.date",
+          "role": "业务时点",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "与记账日期区别"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "部门"
+          ],
+          "concept_ref": "c.department",
+          "role": "管理维度",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "核实层级"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "金额"
+          ],
+          "concept_ref": "c.amount",
+          "role": "指标",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "含税、币种、方向待确认"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        }
+      ],
+      "required_questions": [
+        "金额代表余额还是发生额？",
+        "是否已汇总？",
+        "状态是否影响处理范围？"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "资料类型设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—5节"
+        }
+      ],
+      "validation_status": "generic_reference_not_file_validated",
+      "applicability": "仅作识别候选；没有给定文件时不固定物理行列",
+      "caveats": [
+        "标题及字段名不能单独证明归属和含义",
+        "不推断特定厂商报表已受支持"
+      ]
+    },
+    {
+      "id": "d.matrix",
+      "title": "宽表或多层表头资料",
+      "grain": "对象与多个横向期间或指标",
+      "recognition_features": [
+        "多层表头",
+        "同名指标跨期间或维度"
+      ],
+      "field_mappings": [
+        {
+          "source_field_candidates": [
+            "期间"
+          ],
+          "concept_ref": "c.period",
+          "role": "列维度",
+          "data_type": "text",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "横向期间须展开上下文"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        },
+        {
+          "source_field_candidates": [
+            "单位"
+          ],
+          "concept_ref": "c.unit",
+          "role": "倍率或量纲",
+          "data_type": "requires_confirmation",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "标题区和明细单位分别确认"
+          ],
+          "mapping_status": "candidate_requires_confirmation",
+          "source_refs": [
+            {
+              "source_id": "src.design",
+              "section": "通用资料工作定义"
+            }
+          ]
+        }
+      ],
+      "required_questions": [
+        "哪些行是标题、单位和表头？",
+        "哪些合并区域可展开？",
+        "指标是存量还是流量？"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "资料类型设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—5节"
+        }
+      ],
+      "validation_status": "generic_reference_not_file_validated",
+      "applicability": "仅作识别候选；没有给定文件时不固定物理行列",
+      "caveats": [
+        "标题及字段名不能单独证明归属和含义",
+        "不推断特定厂商报表已受支持"
+      ]
+    },
+    {
+      "id": "d.text",
+      "title": "分隔文本资料",
+      "grain": "逻辑记录",
+      "recognition_features": [
+        "编码、分隔符、引号和换行规则"
+      ],
+      "field_mappings": [],
+      "required_questions": [
+        "编码和分隔符是什么？",
+        "字段内是否含换行？",
+        "表头是第几个逻辑记录？"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "资料类型设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—5节"
+        }
+      ],
+      "validation_status": "generic_reference_not_file_validated",
+      "applicability": "仅作识别候选；没有给定文件时不固定物理行列",
+      "caveats": [
+        "标题及字段名不能单独证明归属和含义",
+        "不推断特定厂商报表已受支持"
+      ]
+    }
+  ],
+  "system_profiles": [
+    {
+      "id": "s.k3cloud-api",
+      "vendor": "Kingdee",
+      "product": "K3Cloud",
+      "version": null,
+      "module": "销售及主数据候选",
+      "report_type": "API表单",
+      "export_variant": "online_api_not_file",
+      "evidence_refs": [
+        {
+          "source_id": "src.kingdee",
+          "section": "入口"
+        },
+        {
+          "source_id": "src.kingdee-fields",
+          "section": "表头/明细分区"
+        },
+        {
+          "source_id": "src.kingdee-custom",
+          "section": "元数据"
+        }
+      ],
+      "recognition_features": [
+        "社区资料提及SAL_SaleOrder表单",
+        "表头和明细字段分区"
+      ],
+      "field_mappings": [
+        {
+          "source_field_candidates": [
+            "SAL_SaleOrder"
+          ],
+          "concept_ref": "c.document",
+          "role": "API表单标识而非导出文件列",
+          "data_type": "form_identifier",
+          "currency": null,
+          "unit": null,
+          "sign_convention": null,
+          "conditions": [
+            "仅为候选表单，实际部署元数据核实"
+          ],
+          "mapping_status": "community_reference_only",
+          "source_refs": [
+            {
+              "source_id": "src.kingdee-fields",
+              "section": "销售订单"
+            }
+          ]
+        }
+      ],
+      "caveats": [
+        "未连接任何ERP",
+        "版本未知，不证明兼容",
+        "技术字段不能直接视为Excel列",
+        "不使用字段前缀猜自定义性质"
+      ],
+      "validation_status": "reference_only_not_deployment_validated"
+    },
+    {
+      "id": "s.k3cloud-export",
+      "vendor": "Kingdee",
+      "product": "K3Cloud",
+      "version": null,
+      "module": null,
+      "report_type": "导出文件",
+      "export_variant": null,
+      "evidence_refs": [
+        {
+          "source_id": "src.kingdee",
+          "section": "线上API范围"
+        }
+      ],
+      "recognition_features": [],
+      "field_mappings": [],
+      "caveats": [
+        "缺导出样例，不构造字段映射或表头位置"
+      ],
+      "validation_status": "pending_export_evidence"
+    },
+    {
+      "id": "s.cangqiong",
+      "vendor": "Kingdee",
+      "product": "苍穹",
+      "version": null,
+      "module": null,
+      "report_type": "API发布",
+      "export_variant": null,
+      "evidence_refs": [
+        {
+          "source_id": "src.publisher",
+          "section": "元Skill职责"
+        }
+      ],
+      "recognition_features": [],
+      "field_mappings": [],
+      "caveats": [
+        "接口发布不等于文件适配",
+        "本轮不采纳发布脚本或连接权限"
+      ],
+      "validation_status": "out_of_current_implementation"
+    },
+    {
+      "id": "s.yonyou",
+      "vendor": "Yonyou",
+      "product": null,
+      "version": null,
+      "module": null,
+      "report_type": null,
+      "export_variant": null,
+      "evidence_refs": [
+        {
+          "source_id": "src.design",
+          "section": "系统适配缺口"
+        }
+      ],
+      "recognition_features": [],
+      "field_mappings": [],
+      "caveats": [
+        "未取得可核实报表及版本；不以同厂商推断通用"
+      ],
+      "validation_status": "pending_evidence"
+    },
+    {
+      "id": "s.sap",
+      "vendor": "SAP",
+      "product": null,
+      "version": null,
+      "module": null,
+      "report_type": null,
+      "export_variant": null,
+      "evidence_refs": [
+        {
+          "source_id": "src.design",
+          "section": "系统适配缺口"
+        }
+      ],
+      "recognition_features": [],
+      "field_mappings": [],
+      "caveats": [
+        "未取得可核实报表及版本；不猜表名字段或ECC/S4兼容"
+      ],
+      "validation_status": "pending_evidence"
+    }
+  ],
+  "mapping_protocol": [
+    "读取结构及字段候选，不传全量文件",
+    "保留物理位置、原始列名和读取身份",
+    "按字段组、粒度、主体、期间核实业务含义",
+    "列出一对多含义和未知项，取得确认",
+    "保存本次资料映射及依据，换文件重新核对"
+  ],
+  "local_sources_policy": "workspace:路径从工作区根解析；其他本地路径从topic根解析；用于参考而非运行依赖"
+}

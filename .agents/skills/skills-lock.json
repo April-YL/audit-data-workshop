@@ -1,0 +1,478 @@
+{
+  "schema_version": 1,
+  "scope": "project",
+  "skills": [
+    {
+      "name": "frontend-design",
+      "repository": "https://github.com/anthropics/skills",
+      "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "upstream_path": "skills/frontend-design",
+      "adaptation_date": "2026-10-28",
+      "changes": [
+        "Project-local approval, scope, architecture, design and verification constraints inserted after frontmatter",
+        "2026-10-28: replaced duplicated common-policy block with concise Chinese trigger/input/output/handoff/stop contract; linked central HANDOFF and AGENTS; narrowed discovery description",
+        "Standalone share snapshot: replace parent workspace link with local HANDOFF coordination."
+      ],
+      "files": [
+        {
+          "path": "frontend-design/SKILL.md",
+          "upstream_sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+          "installed_sha256": "f2cf60897ae23bfe80ecec7c2b8f472f243c0f2a58cfd1cde2f5039c773a5bdd",
+          "modified": true
+        },
+        {
+          "path": "frontend-design/LICENSE.txt",
+          "upstream_sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "installed_sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "modified": false
+        }
+      ],
+      "verification": {
+        "coordination": "static_contract_and_routing_review_passed; actual model use not verified"
+      }
+    },
+    {
+      "name": "react-flow",
+      "repository": "https://github.com/framara/react-flow-skill",
+      "commit": "b060a63f9dd8ee08b1100fc8a23877173b66fc95",
+      "upstream_path": ".",
+      "adaptation_date": "2026-10-28",
+      "changes": [
+        "Project-local approval, scope, architecture, design and verification constraints inserted after frontmatter",
+        "Corrected components-and-hooks.md sibling reference from references/state-management.md to state-management.md; original checksum retained",
+        "2026-10-28: replaced duplicated common-policy block with concise Chinese trigger/input/output/handoff/stop contract; linked central HANDOFF and AGENTS; narrowed discovery description",
+        "Standalone share snapshot: replace parent workspace link with local HANDOFF coordination."
+      ],
+      "files": [
+        {
+          "path": "react-flow/SKILL.md",
+          "upstream_sha256": "d778daeb14446488654751125818ea7d75177591aac5877eb28898225fd85c66",
+          "installed_sha256": "e98c84fdf38391f930de2ad6a64ff04c77af6011390e0fb76a5f752ed49f2fd7",
+          "modified": true
+        },
+        {
+          "path": "react-flow/LICENSE",
+          "upstream_sha256": "8cf7bb065cbc0d55c0b6c3d9954af53b991efc785098c28435968a932906ab1c",
+          "installed_sha256": "8cf7bb065cbc0d55c0b6c3d9954af53b991efc785098c28435968a932906ab1c",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/accessibility.md",
+          "upstream_sha256": "a2a08645d236bf78cd80e17bed3b88ed6b93663c331b7a391f3dd03980b087c5",
+          "installed_sha256": "a2a08645d236bf78cd80e17bed3b88ed6b93663c331b7a391f3dd03980b087c5",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/advanced-patterns.md",
+          "upstream_sha256": "7bde2a0a73c3ad41e90c1a1765fb4dc30499d756d718df6ca753b3adf7333af2",
+          "installed_sha256": "7bde2a0a73c3ad41e90c1a1765fb4dc30499d756d718df6ca753b3adf7333af2",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/components-and-hooks.md",
+          "upstream_sha256": "ffbe34f4f5dc8e16c8bda0b99252088a73328430cf4e268723a546cefc79bb07",
+          "installed_sha256": "736c583034a2842e2e1d54b8b8f4e4c10dcd0ecbcc47b7caf59e35c354d26ded",
+          "modified": true
+        },
+        {
+          "path": "react-flow/references/custom-edges.md",
+          "upstream_sha256": "d386ded0a33be41096d0610d650f028046267b18d215bec7c85346413f1cd168",
+          "installed_sha256": "d386ded0a33be41096d0610d650f028046267b18d215bec7c85346413f1cd168",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/custom-nodes.md",
+          "upstream_sha256": "f4e9b5ed773fc3c71d07bb10c039e5ea89e63b9904ead89fdfe065a714c3d03d",
+          "installed_sha256": "f4e9b5ed773fc3c71d07bb10c039e5ea89e63b9904ead89fdfe065a714c3d03d",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/e2e-testing.md",
+          "upstream_sha256": "9d2e55e44988b118d92a2ec2db796a6b9166b485f29c3c1969b03ea5bd951eab",
+          "installed_sha256": "9d2e55e44988b118d92a2ec2db796a6b9166b485f29c3c1969b03ea5bd951eab",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/fundamentals.md",
+          "upstream_sha256": "c072689d0e13f76aede60abb7a4f03b48255c24b6d96fe7a27f9dcf5cdaf751f",
+          "installed_sha256": "c072689d0e13f76aede60abb7a4f03b48255c24b6d96fe7a27f9dcf5cdaf751f",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/interactivity.md",
+          "upstream_sha256": "09a71befea70ae059a897c6d3ef891f0ecc8a61e9892efc90fbc86d7ca170584",
+          "installed_sha256": "09a71befea70ae059a897c6d3ef891f0ecc8a61e9892efc90fbc86d7ca170584",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/layouting.md",
+          "upstream_sha256": "6a56ace76fd7c1fb6dfe56ca5b37412fbd3ab3daeb472f77d162392470e64232",
+          "installed_sha256": "6a56ace76fd7c1fb6dfe56ca5b37412fbd3ab3daeb472f77d162392470e64232",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/migration.md",
+          "upstream_sha256": "d0be831e1913136cb3270d0586e15269f4b3a3a115b0996f01554b8a0c7f0f06",
+          "installed_sha256": "d0be831e1913136cb3270d0586e15269f4b3a3a115b0996f01554b8a0c7f0f06",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/performance-and-styling.md",
+          "upstream_sha256": "c5aba2253a3049c2cda5d9a1e4d6d35deb4cab2e05054594c0365595b95b9af2",
+          "installed_sha256": "c5aba2253a3049c2cda5d9a1e4d6d35deb4cab2e05054594c0365595b95b9af2",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/recipes.md",
+          "upstream_sha256": "7812bace6fbfa5ff0a528ec48d9450061d7c3d0443fe0bf3d2abd86dbbfd7110",
+          "installed_sha256": "7812bace6fbfa5ff0a528ec48d9450061d7c3d0443fe0bf3d2abd86dbbfd7110",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/ssr-and-hydration.md",
+          "upstream_sha256": "69db5f8c7545971753ba67f16b09383bdac8e8eae1171c74750aa241049a80a5",
+          "installed_sha256": "69db5f8c7545971753ba67f16b09383bdac8e8eae1171c74750aa241049a80a5",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/state-management.md",
+          "upstream_sha256": "f98bd1a54ea6ac2ec6adc4dcf18ddf86a1d5b33603da4493b6d8e218ab5a9366",
+          "installed_sha256": "f98bd1a54ea6ac2ec6adc4dcf18ddf86a1d5b33603da4493b6d8e218ab5a9366",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/troubleshooting.md",
+          "upstream_sha256": "29a643071b2edf2fc4e582fae29a4ca6e067eb6cc5067403a7aa06d422837c8d",
+          "installed_sha256": "29a643071b2edf2fc4e582fae29a4ca6e067eb6cc5067403a7aa06d422837c8d",
+          "modified": false
+        },
+        {
+          "path": "react-flow/references/typescript.md",
+          "upstream_sha256": "1d6355c65fff74707afe1e8c20f1e16f59367fd41818963901d863e46447f7b8",
+          "installed_sha256": "1d6355c65fff74707afe1e8c20f1e16f59367fd41818963901d863e46447f7b8",
+          "modified": false
+        }
+      ],
+      "verification": {
+        "coordination": "static_contract_and_routing_review_passed; actual model use not verified"
+      }
+    },
+    {
+      "name": "writing-plans",
+      "repository": "https://github.com/obra/superpowers",
+      "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
+      "upstream_path": "skills/writing-plans",
+      "adaptation_date": "2026-10-28",
+      "changes": [
+        "Project-local approval, scope, architecture, design and verification constraints inserted after frontmatter",
+        "Removed automatic plan saving, commits, required extra execution skills and execution-mode prompts; retained planning and self-review guidance",
+        "2026-10-28: replaced duplicated common-policy block with concise Chinese trigger/input/output/handoff/stop contract; linked central HANDOFF and AGENTS; narrowed discovery description",
+        "Standalone share snapshot: replace parent workspace link with local HANDOFF coordination."
+      ],
+      "files": [
+        {
+          "path": "writing-plans/SKILL.md",
+          "upstream_sha256": "a6c67c1900064347c2a329990dd3c555657c51c3ec53b259a08aa01a2c26139a",
+          "installed_sha256": "79731373241f59fbeb3515cbef406bf690bc5b1f5d2c4996dc4c7e88cb06afaf",
+          "modified": true
+        },
+        {
+          "path": "writing-plans/LICENSE",
+          "upstream_sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+          "installed_sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+          "modified": false
+        }
+      ],
+      "verification": {
+        "coordination": "static_contract_and_routing_review_passed; actual model use not verified"
+      }
+    },
+    {
+      "name": "systematic-debugging",
+      "repository": "https://github.com/obra/superpowers",
+      "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
+      "upstream_path": "skills/systematic-debugging",
+      "adaptation_date": "2026-10-28",
+      "changes": [
+        "Project-local approval, scope, architecture, design and verification constraints inserted after frontmatter",
+        "Replaced mandatory uninstalled test Skill with direct scoped regression verification; resolved local verification Skill name",
+        "2026-10-28: replaced duplicated common-policy block with concise Chinese trigger/input/output/handoff/stop contract; linked central HANDOFF and AGENTS; narrowed discovery description",
+        "Standalone share snapshot: replace parent workspace link with local HANDOFF coordination."
+      ],
+      "files": [
+        {
+          "path": "systematic-debugging/SKILL.md",
+          "upstream_sha256": "51c6435d98c83c42c96ba7c35725a0b2c376cd487fb1a4e6bd0ddbe7e33ef202",
+          "installed_sha256": "380da0ba8e10477d4ce3ea89c92dd0223df39339dc6e6a1c7c0c7d59a5306a3b",
+          "modified": true
+        },
+        {
+          "path": "systematic-debugging/LICENSE",
+          "upstream_sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+          "installed_sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+          "modified": false
+        },
+        {
+          "path": "systematic-debugging/condition-based-waiting.md",
+          "upstream_sha256": "e89fec8400d6cd50f43407cec9fab50976ba4d55d0ec2eb51c0bd68036b54c26",
+          "installed_sha256": "e89fec8400d6cd50f43407cec9fab50976ba4d55d0ec2eb51c0bd68036b54c26",
+          "modified": false
+        },
+        {
+          "path": "systematic-debugging/condition-based-waiting-example.ts",
+          "upstream_sha256": "40ae5ebe497fdf310200e43fe986552546d0a22837c0d39e855db1cfd33eb88e",
+          "installed_sha256": "40ae5ebe497fdf310200e43fe986552546d0a22837c0d39e855db1cfd33eb88e",
+          "modified": false
+        },
+        {
+          "path": "systematic-debugging/defense-in-depth.md",
+          "upstream_sha256": "1e175fb86fc357e58c6aebf5441e481e1b7868b4380c0456b63a17eefbd18ba7",
+          "installed_sha256": "1e175fb86fc357e58c6aebf5441e481e1b7868b4380c0456b63a17eefbd18ba7",
+          "modified": false
+        },
+        {
+          "path": "systematic-debugging/find-polluter.sh",
+          "upstream_sha256": "dd7b8f13c4cc2a24b33ff87b18da9248f3e1c80a085c3316224f69ff0fa5c43c",
+          "installed_sha256": "dd7b8f13c4cc2a24b33ff87b18da9248f3e1c80a085c3316224f69ff0fa5c43c",
+          "modified": false
+        },
+        {
+          "path": "systematic-debugging/root-cause-tracing.md",
+          "upstream_sha256": "75b933b6a8c40bdb2031b10f21654395b56ec6ab6bc7b018c18d3fe57aeb7fb8",
+          "installed_sha256": "75b933b6a8c40bdb2031b10f21654395b56ec6ab6bc7b018c18d3fe57aeb7fb8",
+          "modified": false
+        }
+      ],
+      "verification": {
+        "coordination": "static_contract_and_routing_review_passed; actual model use not verified"
+      }
+    },
+    {
+      "name": "verification-before-completion",
+      "repository": "https://github.com/obra/superpowers",
+      "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
+      "upstream_path": "skills/verification-before-completion",
+      "adaptation_date": "2026-10-28",
+      "changes": [
+        "Project-local approval, scope, architecture, design and verification constraints inserted after frontmatter",
+        "2026-10-28: replaced duplicated common-policy block with concise Chinese trigger/input/output/handoff/stop contract; linked central HANDOFF and AGENTS; narrowed discovery description",
+        "Standalone share snapshot: replace parent workspace link with local HANDOFF coordination."
+      ],
+      "files": [
+        {
+          "path": "verification-before-completion/SKILL.md",
+          "upstream_sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
+          "installed_sha256": "eafe67938eddadbad82da12aa76135b1b3cca303a3819ca36e331a4b006c3f56",
+          "modified": true
+        },
+        {
+          "path": "verification-before-completion/LICENSE",
+          "upstream_sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+          "installed_sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+          "modified": false
+        }
+      ],
+      "verification": {
+        "coordination": "static_contract_and_routing_review_passed; actual model use not verified"
+      }
+    },
+    {
+      "name": "duckdb-friendly-sql",
+      "repository": "https://github.com/mustafahasankhan/duckdb-friendly-sql-skill",
+      "commit": "ad8704a47b9f4f8aa6cfe5213c1f6a619e5fe9f3",
+      "upstream_path": ".",
+      "adaptation_date": "2026-10-28",
+      "license": "MIT (README declaration; no separate license file)",
+      "changes": [
+        "Added project processing, scope, architecture and cooperation constraints",
+        "Replaced mandatory shorthand/group-by-all/table-replacement defaults with explicit approved grouping and disposable-table boundaries",
+        "2026-10-28: replaced duplicated common-policy block with concise Chinese trigger/input/output/handoff/stop contract; linked central HANDOFF and AGENTS; narrowed discovery description",
+        "Standalone share snapshot: replace parent workspace link with local HANDOFF coordination."
+      ],
+      "verification": {
+        "file_integrity": "passed",
+        "behavior_scenarios": "static_rule_review_passed; no engine execution",
+        "automatic_discovery": "not_verified",
+        "engine_execution": "not_run",
+        "desktop_acceptance": "not_run",
+        "coordination": "static_contract_and_routing_review_passed; actual model use not verified"
+      },
+      "files": [
+        {
+          "path": "duckdb-friendly-sql/SKILL.md",
+          "upstream_sha256": "8149ee2c2cf2f52f92993c1fd6f7a9bfb5c4ae7928b3df550c576ee96b84f2d1",
+          "installed_sha256": "a6dde8234eb76dd2712c7e15932b47d5d8ceaf061a9d78d75bed165f655be96c",
+          "modified": true
+        },
+        {
+          "path": "duckdb-friendly-sql/README.md",
+          "upstream_sha256": "14f40e65fb06be4032aae431cd45f3371b5dfee4be0811851f3157fe1e18a516",
+          "installed_sha256": "14f40e65fb06be4032aae431cd45f3371b5dfee4be0811851f3157fe1e18a516",
+          "modified": false
+        },
+        {
+          "path": "duckdb-friendly-sql/references/anti-patterns.md",
+          "upstream_sha256": "0cb682521edd93792e2a25e835364e88724db4f2e792a7bb8375111fe161fbe0",
+          "installed_sha256": "0cb682521edd93792e2a25e835364e88724db4f2e792a7bb8375111fe161fbe0",
+          "modified": false
+        },
+        {
+          "path": "duckdb-friendly-sql/references/cli.md",
+          "upstream_sha256": "580da5630748cad757fde3da42b018634fe6eb13a63ea7eedc43a5c2704cee8a",
+          "installed_sha256": "580da5630748cad757fde3da42b018634fe6eb13a63ea7eedc43a5c2704cee8a",
+          "modified": false
+        },
+        {
+          "path": "duckdb-friendly-sql/references/data-import.md",
+          "upstream_sha256": "bc38c85d317b5cc65e46231d9abc94eff595598fac8e08d18965839d0cfa5dba",
+          "installed_sha256": "bc38c85d317b5cc65e46231d9abc94eff595598fac8e08d18965839d0cfa5dba",
+          "modified": false
+        },
+        {
+          "path": "duckdb-friendly-sql/references/friendly-sql-cheatsheet.md",
+          "upstream_sha256": "9cd50daffc041b16042f36567e88c8b99d56d4a09f9fceba106a963e1c47a4a0",
+          "installed_sha256": "9cd50daffc041b16042f36567e88c8b99d56d4a09f9fceba106a963e1c47a4a0",
+          "modified": false
+        },
+        {
+          "path": "duckdb-friendly-sql/references/visualization.md",
+          "upstream_sha256": "f09e1b8b62ee8972e468a2e8e6205f11fdee44831f80e3595591911062632e8b",
+          "installed_sha256": "f09e1b8b62ee8972e468a2e8e6205f11fdee44831f80e3595591911062632e8b",
+          "modified": false
+        }
+      ]
+    },
+    {
+      "name": "duckdb-docs",
+      "repository": "https://github.com/duckdb/duckdb-skills",
+      "commit": "7feda8e01e22bc0886c86123f3884947e36d8c69",
+      "upstream_path": "skills/duckdb-docs",
+      "adaptation_date": "2026-10-28",
+      "license": "MIT",
+      "changes": [
+        "Added project processing, scope, architecture and cooperation constraints",
+        "Replaced auto-install/index/home-cache shell workflow with online primary-source lookup and explicit version checking; original retained in staging",
+        "2026-10-28: replaced duplicated common-policy block with concise Chinese trigger/input/output/handoff/stop contract; linked central HANDOFF and AGENTS; narrowed discovery description",
+        "Standalone share snapshot: replace parent workspace link with local HANDOFF coordination."
+      ],
+      "verification": {
+        "file_integrity": "passed",
+        "behavior_scenarios": "static_rule_review_passed; no engine execution",
+        "automatic_discovery": "not_verified",
+        "engine_execution": "not_run",
+        "desktop_acceptance": "not_run",
+        "coordination": "static_contract_and_routing_review_passed; actual model use not verified"
+      },
+      "files": [
+        {
+          "path": "duckdb-docs/SKILL.md",
+          "upstream_sha256": "e6388de6257665f71da783b4d4e7b3072d788c0fbc4ce280959fb3c9191d4489",
+          "installed_sha256": "57f0d94f02d82f0886af31a72ef52e4df7e0c213587e04a663b47d13fdffc729",
+          "modified": true
+        },
+        {
+          "path": "duckdb-docs/LICENSE",
+          "upstream_sha256": "7e17fd31249fa875cb3b1c5e05c6c3e99b75509f6a2804ca176c217834de1dcb",
+          "installed_sha256": "7e17fd31249fa875cb3b1c5e05c6c3e99b75509f6a2804ca176c217834de1dcb",
+          "modified": false
+        }
+      ]
+    },
+    {
+      "name": "rust-testing",
+      "repository": "https://github.com/full-stack-skills/rust-skills",
+      "commit": "b8a6af74af28ee86b8cbbbc3075cde0b31a5155e",
+      "upstream_path": "skills/rust-testing",
+      "adaptation_date": "2026-10-28",
+      "license": "Apache-2.0",
+      "changes": [
+        "Added project processing, scope, architecture and cooperation constraints",
+        "Corrected hidden doctest line explanation; made coverage tooling explicitly optional and authorization-gated",
+        "2026-10-28: replaced duplicated common-policy block with concise Chinese trigger/input/output/handoff/stop contract; linked central HANDOFF and AGENTS; narrowed discovery description",
+        "Standalone share snapshot: replace parent workspace link with local HANDOFF coordination."
+      ],
+      "verification": {
+        "file_integrity": "passed",
+        "behavior_scenarios": "static_rule_review_passed; no engine execution",
+        "automatic_discovery": "not_verified",
+        "engine_execution": "not_run",
+        "desktop_acceptance": "not_run",
+        "coordination": "static_contract_and_routing_review_passed; actual model use not verified"
+      },
+      "files": [
+        {
+          "path": "rust-testing/SKILL.md",
+          "upstream_sha256": "eb3417fc2c71204b65f925796c6ec471c8e17745ecd3d364c165a8c30411e0eb",
+          "installed_sha256": "cf4554a8a75558ccb1f9ed1cd5aca1ea09ac2f930c015de186880940149dcbed",
+          "modified": true
+        },
+        {
+          "path": "rust-testing/LICENSE",
+          "upstream_sha256": "9788c988b60209ecf085939b225ef19f4b0313b35df22c230469d4ced2061938",
+          "installed_sha256": "9788c988b60209ecf085939b225ef19f4b0313b35df22c230469d4ced2061938",
+          "modified": false
+        },
+        {
+          "path": "rust-testing/agents/openai.yaml",
+          "upstream_sha256": "52df267e3fc8892ec3eea0869285bae695fa5b25c73849fcc8126c9701363a07",
+          "installed_sha256": "52df267e3fc8892ec3eea0869285bae695fa5b25c73849fcc8126c9701363a07",
+          "modified": false
+        },
+        {
+          "path": "rust-testing/examples/examples.md",
+          "upstream_sha256": "b1633d68adc7db835c65886d08a7aa9ec39950d7f59b91be5884ac8c18de078f",
+          "installed_sha256": "b1633d68adc7db835c65886d08a7aa9ec39950d7f59b91be5884ac8c18de078f",
+          "modified": false
+        },
+        {
+          "path": "rust-testing/examples/golden-tests/Cargo.toml",
+          "upstream_sha256": "25a2c7ceb85b02dbaf5f19fbfef69437eae30a7eff95bc83e7ee48835a9bcdf8",
+          "installed_sha256": "25a2c7ceb85b02dbaf5f19fbfef69437eae30a7eff95bc83e7ee48835a9bcdf8",
+          "modified": false
+        },
+        {
+          "path": "rust-testing/examples/golden-tests/src/lib.rs",
+          "upstream_sha256": "ca8071a4310a6413fb2f40f7e90b2070780e83a4727674b29cef2d79b8e1c814",
+          "installed_sha256": "ca8071a4310a6413fb2f40f7e90b2070780e83a4727674b29cef2d79b8e1c814",
+          "modified": false
+        },
+        {
+          "path": "rust-testing/references/concurrency-daemon-platform-testing.md",
+          "upstream_sha256": "1ea62c048b802385414551c12d6b212ad425d1b88ef7ec28b72976f69958a55c",
+          "installed_sha256": "1ea62c048b802385414551c12d6b212ad425d1b88ef7ec28b72976f69958a55c",
+          "modified": false
+        },
+        {
+          "path": "rust-testing/references/references.md",
+          "upstream_sha256": "6aa9c2f61c5c5e71d6af8b771a57b5ccc292b907d91484dd97101626416c8452",
+          "installed_sha256": "6aa9c2f61c5c5e71d6af8b771a57b5ccc292b907d91484dd97101626416c8452",
+          "modified": false
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "file_count_excluding_lock": 48,
+    "new_files_count": 17,
+    "local_markdown_links_checked": 3,
+    "unresolved_local_links": [],
+    "automatic_discovery": "not_verified",
+    "example_execution": "not_run"
+  },
+  "notes": [
+    "Supporting scripts were not executed.",
+    "Automatic discovery requires a new turn in this project context; not verified by this installer.",
+    "No global configuration or Git staging/commit/push changed."
+  ],
+  "coordination": {
+    "entry": "../../docs/03_HANDOFF.md#skill-coordination",
+    "policy": "../../docs/03_HANDOFF.md#skill-coordination",
+    "status": "static_review_only",
+    "actual_invocation": "not_verified",
+    "scenarios": {
+      "configuration_panel": "design only; canvas specialist only for changed graph behavior; preserve computation",
+      "deduplication": "require keys, stable retention order, ties and excluded-record policy before implementation",
+      "runtime_failure": "reproduce and trace before fix; respect scope and stop conditions"
+    }
+  }
+}

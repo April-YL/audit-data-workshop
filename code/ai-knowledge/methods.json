@@ -1,0 +1,1595 @@
+{
+  "schema_version": 1,
+  "package_version": "0.1.0",
+  "updated_at": "2026-10-29",
+  "status": "knowledge_draft_not_runtime_integrated",
+  "methods": [
+    {
+      "id": "m.structure",
+      "title": "结构整理",
+      "intent": "将物理表格整理为有来源的记录",
+      "input_requirements": [
+        "原始网格、工作表、合并区域及物理位置"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "region",
+          "meaning": "列范围与明细起止行",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "header_rows",
+          "meaning": "表头行及字段生成方式",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "merge_policy",
+          "meaning": "允许展开的合并区域和列",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "summary_policy",
+          "meaning": "合计说明及空白行的识别与去向",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "哪些是明细、标题和合计？",
+        "普通空白是否保留？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "识别并展示候选区域"
+        },
+        {
+          "order": 2,
+          "action": "确认表头与明细边界"
+        },
+        {
+          "order": 3,
+          "action": "按真实合并区域生成字段；补值限确认范围"
+        },
+        {
+          "order": 4,
+          "action": "保留原始网格及排除记录"
+        }
+      ],
+      "effects": [
+        "字段和记录数可能变化；来源不变"
+      ],
+      "exceptions": [
+        {
+          "condition": "表头重名或为空",
+          "destination": "结构问题",
+          "action": "暂停确认"
+        },
+        {
+          "condition": "区域截断合并单元格",
+          "destination": "结构问题",
+          "action": "拒绝该方案"
+        }
+      ],
+      "review_requirements": [
+        "逐列核对层级及原始位置",
+        "明细与排除记录均能定位"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.header",
+        "c.detail-region",
+        "c.total-row",
+        "c.provenance"
+      ],
+      "knowledge_refs": [
+        "k.quality",
+        "k.evidence-cn"
+      ],
+      "required_capabilities": [
+        "bounded_read",
+        "structure_normalize"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "region",
+        "header_rows",
+        "merge_policy",
+        "summary_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.map",
+      "title": "字段选择与映射",
+      "intent": "将实际字段对应目标概念并更名",
+      "input_requirements": [
+        "已确认字段结构和目标用途"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "mapping",
+          "meaning": "每个源字段到输出字段的显式关系",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "unmapped_policy",
+          "meaning": "未映射列保留、排除或待核实",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "同名列是否同义？",
+        "哪些字段必须保留？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "识别候选含义并列出歧义"
+        },
+        {
+          "order": 2,
+          "action": "检查目标重名和缺字段"
+        },
+        {
+          "order": 3,
+          "action": "形成逐列映射及排除清单"
+        }
+      ],
+      "effects": [
+        "列集合与名称变化，行数保持"
+      ],
+      "exceptions": [
+        {
+          "condition": "缺少必要字段",
+          "destination": "配置问题",
+          "action": "不猜替代字段"
+        },
+        {
+          "condition": "多个候选含义",
+          "destination": "待确认",
+          "action": "展示依据"
+        }
+      ],
+      "review_requirements": [
+        "行数不变",
+        "源列与目标列逐项核对",
+        "保留原值及来源"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.local-input",
+          "section": "mapping.json"
+        }
+      ],
+      "concept_refs": [
+        "c.code",
+        "c.name",
+        "c.data-type",
+        "c.provenance"
+      ],
+      "knowledge_refs": [
+        "k.mapping-evidence",
+        "k.supporting"
+      ],
+      "required_capabilities": [
+        "field_map"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "mapping",
+        "unmapped_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.convert",
+      "title": "类型转换",
+      "intent": "按明确规则解析编码、日期和金额",
+      "input_requirements": [
+        "原始文本、字段含义及类型要求"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "target_type",
+          "meaning": "目标类型与允许精度",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "parse_policy",
+          "meaning": "地区日期格式、千分位、方向及单位",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "invalid_policy",
+          "meaning": "无效和超精度值去向",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "rounding_policy",
+          "meaning": "不舍入或明确方式；无规则时异常",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "日期格式是什么？",
+        "金额符号、单位和小数位怎样解释？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "保留原值"
+        },
+        {
+          "order": 2,
+          "action": "按明确格式解析"
+        },
+        {
+          "order": 3,
+          "action": "分离无效、缺失和零"
+        },
+        {
+          "order": 4,
+          "action": "记录转换结果和依据"
+        }
+      ],
+      "effects": [
+        "字段类型变化；异常数量可增加"
+      ],
+      "exceptions": [
+        {
+          "condition": "解析失败或超精度",
+          "destination": "异常记录",
+          "action": "保留原值与来源"
+        },
+        {
+          "condition": "未知汇率或日期",
+          "destination": "参数问题",
+          "action": "不自动换算"
+        }
+      ],
+      "review_requirements": [
+        "正常与异常覆盖全部输入",
+        "编码前导零保持",
+        "核对转换前后值及精度"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.code",
+        "c.date",
+        "c.amount",
+        "c.currency",
+        "c.unit",
+        "c.sign",
+        "c.data-type"
+      ],
+      "knowledge_refs": [
+        "k.double-entry",
+        "k.currency-intl",
+        "k.safe-transform"
+      ],
+      "required_capabilities": [
+        "typed_parse",
+        "decimal_parse",
+        "date_parse"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "target_type",
+        "parse_policy",
+        "invalid_policy",
+        "rounding_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.text",
+      "title": "文本规范化",
+      "intent": "按指定规则清理文本表达",
+      "input_requirements": [
+        "目标字段及规范化意图"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "fields",
+          "meaning": "处理列",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "operations",
+          "meaning": "去空格、替换、大小写等顺序",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "collision_policy",
+          "meaning": "清理后不同原值合并的处理方式",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "编码是否允许去空格或大小写变化？",
+        "是否保留原字段？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "生成影响清单"
+        },
+        {
+          "order": 2,
+          "action": "按显式顺序清理"
+        },
+        {
+          "order": 3,
+          "action": "列出多个原值归一结果"
+        }
+      ],
+      "effects": [
+        "值可变化，行数保持"
+      ],
+      "exceptions": [
+        {
+          "condition": "归一后身份碰撞",
+          "destination": "冲突记录",
+          "action": "不自动合并对象"
+        }
+      ],
+      "review_requirements": [
+        "行数不变",
+        "前后差异和碰撞可复核"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.name",
+        "c.code",
+        "c.duplicate"
+      ],
+      "knowledge_refs": [
+        "k.safe-transform"
+      ],
+      "required_capabilities": [
+        "text_normalize"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "fields",
+        "operations",
+        "collision_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.filter",
+      "title": "筛选与标记",
+      "intent": "按明确条件标记或分流记录",
+      "input_requirements": [
+        "字段含义、条件及处理范围"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "predicate",
+          "meaning": "字段、操作符、值和组合逻辑",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "null_policy",
+          "meaning": "缺失与无效值怎样判断",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "mode",
+          "meaning": "标记或分流",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "excluded_policy",
+          "meaning": "未命中记录保留位置",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "全部条件都需满足还是任一满足？",
+        "空值属于哪一类？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "校验条件类型与字段"
+        },
+        {
+          "order": 2,
+          "action": "按规则标记"
+        },
+        {
+          "order": 3,
+          "action": "若分流，分别保留命中与未纳入"
+        }
+      ],
+      "effects": [
+        "标记行数不变；分流各类合计等于输入"
+      ],
+      "exceptions": [
+        {
+          "condition": "条件无法比较",
+          "destination": "异常记录",
+          "action": "不视为默认不命中"
+        }
+      ],
+      "review_requirements": [
+        "命中、未纳入、异常互斥且完整",
+        "条件边界逐项检查"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.record",
+        "c.null",
+        "c.exception",
+        "c.period"
+      ],
+      "knowledge_refs": [
+        "k.period",
+        "k.safe-transform"
+      ],
+      "required_capabilities": [
+        "predicate",
+        "row_mark",
+        "row_partition"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "predicate",
+        "null_policy",
+        "mode",
+        "excluded_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.missing",
+      "title": "缺失值处理",
+      "intent": "在保持未知含义的前提下处理缺失",
+      "input_requirements": [
+        "缺失定义、来源原因及允许补值依据"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "missing_definition",
+          "meaning": "NULL、空字符串、空白的区分",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "fill_policy",
+          "meaning": "保留、标记或按明确依据补值",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "scope",
+          "meaning": "补值列、分组及顺序",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "evidence",
+          "meaning": "补值依据和来源",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "缺失表示未知、不适用还是零？",
+        "补值是否有依据？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "分类型统计缺失"
+        },
+        {
+          "order": 2,
+          "action": "应用获确认规则"
+        },
+        {
+          "order": 3,
+          "action": "保留原值、标记与补值来源"
+        }
+      ],
+      "effects": [
+        "值可能变化；不应静默改变行数"
+      ],
+      "exceptions": [
+        {
+          "condition": "无补值依据",
+          "destination": "待核实",
+          "action": "保留缺失"
+        },
+        {
+          "condition": "跨组补值",
+          "destination": "规则错误",
+          "action": "阻止"
+        }
+      ],
+      "review_requirements": [
+        "缺失前后数量",
+        "每个补值可追溯",
+        "零与未知保持区分"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.null",
+        "c.provenance",
+        "c.amount"
+      ],
+      "knowledge_refs": [
+        "k.safe-transform"
+      ],
+      "required_capabilities": [
+        "missing_classify",
+        "bounded_fill"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "missing_definition",
+        "fill_policy",
+        "scope",
+        "evidence"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.dedupe",
+      "title": "重复识别与去重",
+      "intent": "按业务粒度识别等价记录并明确保留",
+      "input_requirements": [
+        "字段、粒度及稳定顺序"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "keys",
+          "meaning": "比较字段及范围",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "equality",
+          "meaning": "空值、大小写、空格比较政策",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "retention",
+          "meaning": "保留全部、首条、末条或排序优先",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "tie_breaker",
+          "meaning": "并列时确定顺序与来源标识",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "什么算重复？",
+        "为什么保留这一条？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "按指定键分组识别"
+        },
+        {
+          "order": 2,
+          "action": "先输出重复组与差异"
+        },
+        {
+          "order": 3,
+          "action": "按显式保留规则生成结果和移除清单"
+        }
+      ],
+      "effects": [
+        "记录数可减少；组内取舍可解释"
+      ],
+      "exceptions": [
+        {
+          "condition": "保留优先级并列且未定",
+          "destination": "待确认",
+          "action": "不自动选择"
+        },
+        {
+          "condition": "相同键但重要字段冲突",
+          "destination": "冲突记录",
+          "action": "分开复核"
+        }
+      ],
+      "review_requirements": [
+        "输入=保留+移除",
+        "保留与移除来源完整",
+        "不同分录不因同单据号误删"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.duplicate",
+        "c.key",
+        "c.document",
+        "c.line",
+        "c.grain"
+      ],
+      "knowledge_refs": [
+        "k.safe-transform"
+      ],
+      "required_capabilities": [
+        "duplicate_groups",
+        "stable_order",
+        "row_partition"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "keys",
+        "equality",
+        "retention",
+        "tie_breaker"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.append",
+      "title": "同类资料追加",
+      "intent": "把一致含义的记录纵向组合",
+      "input_requirements": [
+        "各输入的字段、粒度、主体期间及指标说明"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "schema_mapping",
+          "meaning": "各输入字段对应关系",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "type_policy",
+          "meaning": "类型及缺列政策",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "scope_policy",
+          "meaning": "主体期间隔离或合并方式",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "overlap_policy",
+          "meaning": "重复文件与交叉范围处理",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "文件范围是否重叠？",
+        "字段同名是否同义？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "分别确认结构和映射"
+        },
+        {
+          "order": 2,
+          "action": "统一明确的类型单位及含义"
+        },
+        {
+          "order": 3,
+          "action": "追加并保留来源及范围标签"
+        },
+        {
+          "order": 4,
+          "action": "标记缺列和重叠"
+        }
+      ],
+      "effects": [
+        "行数为被纳入输入之和；不默认去重"
+      ],
+      "exceptions": [
+        {
+          "condition": "类型或口径冲突",
+          "destination": "配置问题",
+          "action": "先转换或暂停"
+        },
+        {
+          "condition": "文件重复或范围重叠",
+          "destination": "待确认",
+          "action": "不擅自去重"
+        }
+      ],
+      "review_requirements": [
+        "逐输入行数与分组控制数",
+        "来源可定位",
+        "不同币种单位不混合合计"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.entity",
+        "c.period",
+        "c.grain",
+        "c.data-type",
+        "c.currency",
+        "c.unit"
+      ],
+      "knowledge_refs": [
+        "k.entity",
+        "k.quality"
+      ],
+      "required_capabilities": [
+        "field_map",
+        "schema_validate",
+        "append"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "schema_mapping",
+        "type_policy",
+        "scope_policy",
+        "overlap_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.join",
+      "title": "多表关联",
+      "intent": "按明确身份关系补充字段或比较数据",
+      "input_requirements": [
+        "两侧粒度、匹配字段及基数"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "keys",
+          "meaning": "左右匹配字段及类型",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "join_type",
+          "meaning": "左、内、全等关联范围",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "cardinality",
+          "meaning": "一对一、一对多或多对多及预期",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "null_and_duplicate_policy",
+          "meaning": "空键、重复键政策",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "collision_policy",
+          "meaning": "同名列和多版本的取值方式",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "哪张表是主表？",
+        "同一键多条应展开还是先汇总？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "校验键、空值与两侧重复度"
+        },
+        {
+          "order": 2,
+          "action": "对照预期基数"
+        },
+        {
+          "order": 3,
+          "action": "关联并分类匹配、左右未匹配"
+        },
+        {
+          "order": 4,
+          "action": "保留两侧来源及冲突"
+        }
+      ],
+      "effects": [
+        "记录数可能变化，金额可能因展开重复"
+      ],
+      "exceptions": [
+        {
+          "condition": "非预期多对多",
+          "destination": "关联问题",
+          "action": "阻止并展示重复键"
+        },
+        {
+          "condition": "空键或身份不明",
+          "destination": "未匹配或异常",
+          "action": "按已确认政策处理"
+        }
+      ],
+      "review_requirements": [
+        "分类数量与来源",
+        "关联前后主表金额按去重来源核对",
+        "未匹配与字段冲突逐项核实"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.key",
+        "c.composite-key",
+        "c.match",
+        "c.unmatched",
+        "c.grain",
+        "c.provenance"
+      ],
+      "knowledge_refs": [
+        "k.mapping-evidence",
+        "k.conflict-cn"
+      ],
+      "required_capabilities": [
+        "key_profile",
+        "join",
+        "lineage"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "keys",
+        "join_type",
+        "cardinality",
+        "null_and_duplicate_policy",
+        "collision_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.aggregate",
+      "title": "分组汇总",
+      "intent": "按明确维度与指标生成汇总",
+      "input_requirements": [
+        "记录粒度、分组维度、指标口径"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "group_keys",
+          "meaning": "分组字段与空组政策",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "metrics",
+          "meaning": "SUM、COUNT等指标及含义",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "measure_basis",
+          "meaning": "余额或发生额、币种单位方向和期间",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "invalid_policy",
+          "meaning": "缺失、异常及未归组处理",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "汇总哪个指标？",
+        "余额是否跨时点？",
+        "不同币种要分开吗？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "确认指标可加性"
+        },
+        {
+          "order": 2,
+          "action": "按维度分组"
+        },
+        {
+          "order": 3,
+          "action": "计算指标并记录异常"
+        },
+        {
+          "order": 4,
+          "action": "保留组成员关系"
+        }
+      ],
+      "effects": [
+        "明细变为组记录；不能以总额相等代替明细正确"
+      ],
+      "exceptions": [
+        {
+          "condition": "存量跨时点相加或异币种混加",
+          "destination": "口径问题",
+          "action": "待明确规则"
+        },
+        {
+          "condition": "分组键缺失",
+          "destination": "未归组异常",
+          "action": "保留数量和金额影响"
+        }
+      ],
+      "review_requirements": [
+        "可加指标的分组及合计对拍",
+        "组成员完整",
+        "异常和未归组影响明确"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        }
+      ],
+      "concept_refs": [
+        "c.aggregate-record",
+        "c.balance",
+        "c.movement",
+        "c.period",
+        "c.currency",
+        "c.unit"
+      ],
+      "knowledge_refs": [
+        "k.period",
+        "k.currency-intl",
+        "k.analysis-cn"
+      ],
+      "required_capabilities": [
+        "group_aggregate",
+        "group_lineage"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "group_keys",
+        "metrics",
+        "measure_basis",
+        "invalid_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    },
+    {
+      "id": "m.reconcile",
+      "title": "差异核对",
+      "intent": "按同一比较基础识别两侧差异",
+      "input_requirements": [
+        "独立资料、比较维度、控制基数与来源"
+      ],
+      "applicability": {
+        "when": [
+          "目标与字段含义明确，已获准处理对应资料"
+        ],
+        "not_when": [
+          "关键参数缺失或资料不完整时仅生成待确认方案"
+        ]
+      },
+      "required_parameters": [
+        {
+          "name": "comparison_keys",
+          "meaning": "两侧比较身份",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "basis",
+          "meaning": "主体期间币种单位及金额口径",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "tolerance",
+          "meaning": "精度和容差依据",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        },
+        {
+          "name": "difference_policy",
+          "meaning": "仅单侧、金额差异、资料异常的分类",
+          "required": true,
+          "default": null,
+          "blocking_if_missing": true
+        }
+      ],
+      "clarification_questions": [
+        "两侧是否同一范围和口径？",
+        "容差由谁确认？"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "先核查资料及比较基础"
+        },
+        {
+          "order": 2,
+          "action": "分别形成比较粒度"
+        },
+        {
+          "order": 3,
+          "action": "匹配并列出差异和仅单侧"
+        },
+        {
+          "order": 4,
+          "action": "调查原因并保留状态"
+        }
+      ],
+      "effects": [
+        "生成差异记录；不自动调整原数"
+      ],
+      "exceptions": [
+        {
+          "condition": "金额相符但来源存在异常",
+          "destination": "待复核",
+          "action": "不能标已完整核对"
+        },
+        {
+          "condition": "两侧证据冲突",
+          "destination": "待调查",
+          "action": "保留两侧值"
+        }
+      ],
+      "review_requirements": [
+        "逐项差异而非只看总额",
+        "两侧未匹配与异常影响",
+        "解释和专业结论独立复核"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src.design",
+          "section": "通用方法设计"
+        },
+        {
+          "source_id": "src.local-contract",
+          "section": "第4—7节"
+        },
+        {
+          "source_id": "src.reconciliation",
+          "section": "核对方法与差异分类"
+        }
+      ],
+      "concept_refs": [
+        "c.match",
+        "c.unmatched",
+        "c.exception",
+        "c.provenance",
+        "c.period"
+      ],
+      "knowledge_refs": [
+        "k.evidence-cn",
+        "k.evidence-intl",
+        "k.analysis-cn",
+        "k.reconcile-method"
+      ],
+      "required_capabilities": [
+        "comparison",
+        "difference_classify"
+      ],
+      "execution_status": "unbound",
+      "reuse_parameters": [
+        "comparison_keys",
+        "basis",
+        "tolerance",
+        "difference_policy"
+      ],
+      "policy": "所有步骤仅为知识方案；执行时须由未来工具登记及本地校验绑定"
+    }
+  ],
+  "walkthrough_cases": [
+    {
+      "id": "case.append",
+      "title": "异构字段追加",
+      "request": "把两份同期间部门明细统一列名后追加，保留来源，不去重。",
+      "method_refs": [
+        "m.map",
+        "m.append"
+      ],
+      "facts": {
+        "same_entity": true,
+        "period": "2026-09",
+        "currency": "CNY",
+        "unit": "元",
+        "grain": "一条业务明细",
+        "inputs": [
+          {
+            "source": "A",
+            "rows": [
+              {
+                "部门码": "01",
+                "金额文本": "10.00"
+              },
+              {
+                "部门码": "02",
+                "金额文本": "-2.00"
+              }
+            ]
+          },
+          {
+            "source": "B",
+            "rows": [
+              {
+                "部门编码": "01",
+                "金额": "5.00"
+              }
+            ]
+          }
+        ],
+        "confirmed_mapping": {
+          "部门码": "department_code",
+          "部门编码": "department_code",
+          "金额文本": "amount",
+          "金额": "amount"
+        },
+        "amount_format": "十进制文本，保留原值",
+        "missing_columns": "缺必要列即暂停",
+        "overlap": "已确认无重复文件"
+      },
+      "expected": {
+        "plan_status": "ready_as_knowledge_plan",
+        "required_questions": [],
+        "steps": [
+          "m.map",
+          "m.append"
+        ],
+        "output_rows": 3,
+        "control_sum": "13.00",
+        "source_counts": {
+          "A": 2,
+          "B": 1
+        },
+        "invariants": [
+          "部门编码01前导零保留",
+          "不默默去重",
+          "金额文本与数值差异在工具绑定时显式转换"
+        ]
+      },
+      "execution_status": "not_executed"
+    },
+    {
+      "id": "case.join",
+      "title": "明细补充对象名称",
+      "request": "按公司和对象编码给交易表补充名称，保留全部交易，未匹配单列。",
+      "method_refs": [
+        "m.join"
+      ],
+      "facts": {
+        "left": [
+          {
+            "entity": "A",
+            "code": "001",
+            "amount": "10.00"
+          },
+          {
+            "entity": "A",
+            "code": "002",
+            "amount": "20.00"
+          }
+        ],
+        "right": [
+          {
+            "entity": "A",
+            "code": "001",
+            "name": "示例对象甲"
+          },
+          {
+            "entity": "A",
+            "code": "003",
+            "name": "示例对象丙"
+          }
+        ],
+        "keys": [
+          "entity",
+          "code"
+        ],
+        "join_type": "left",
+        "cardinality": "many_to_one",
+        "null_policy": "空键列异常，不互相匹配",
+        "duplicate_policy": "右侧重复键阻止",
+        "collision_policy": "名称补充为新列"
+      },
+      "expected": {
+        "plan_status": "ready_as_knowledge_plan",
+        "required_questions": [],
+        "steps": [
+          "m.join"
+        ],
+        "output_rows": 2,
+        "matched_rows": 1,
+        "left_unmatched_rows": 1,
+        "right_unused_rows": 1,
+        "left_amount_total": "30.00",
+        "invariants": [
+          "不把未匹配交易删掉",
+          "右侧未使用不同于左关联输出记录"
+        ]
+      },
+      "execution_status": "not_executed"
+    },
+    {
+      "id": "case.clean",
+      "title": "筛选去重汇总",
+      "request": "保留状态有效的记录，按业务ID判重并按更新序号保留最大者，再按部门汇总发生额。",
+      "method_refs": [
+        "m.filter",
+        "m.dedupe",
+        "m.aggregate"
+      ],
+      "facts": {
+        "scope": {
+          "entity": "A",
+          "period": "2026-09",
+          "currency": "CNY",
+          "unit": "元",
+          "amount_basis": "当月发生额"
+        },
+        "rows": [
+          {
+            "id": "X",
+            "version": 1,
+            "department": "D1",
+            "status": "有效",
+            "amount": "10.00"
+          },
+          {
+            "id": "X",
+            "version": 2,
+            "department": "D1",
+            "status": "有效",
+            "amount": "12.00"
+          },
+          {
+            "id": "Y",
+            "version": 1,
+            "department": "D2",
+            "status": "无效",
+            "amount": "5.00"
+          },
+          {
+            "id": "Z",
+            "version": 1,
+            "department": "D2",
+            "status": "有效",
+            "amount": "8.00"
+          }
+        ],
+        "null_policy": "关键字段缺失单列异常",
+        "retention": "version最大；并列阻止",
+        "duplicate_scope": [
+          "entity",
+          "period",
+          "id"
+        ],
+        "group_keys": [
+          "department"
+        ],
+        "metric": "SUM(amount)"
+      },
+      "expected": {
+        "plan_status": "ready_as_knowledge_plan",
+        "required_questions": [],
+        "steps": [
+          "m.filter",
+          "m.dedupe",
+          "m.aggregate"
+        ],
+        "input_rows": 4,
+        "included_rows": 3,
+        "excluded_rows": 1,
+        "retained_rows": 2,
+        "removed_duplicate_rows": 1,
+        "group_amounts": {
+          "D1": "12.00",
+          "D2": "8.00"
+        },
+        "output_groups": 2,
+        "total": "20.00"
+      },
+      "execution_status": "not_executed"
+    },
+    {
+      "id": "case.missing",
+      "title": "关键条件缺失",
+      "request": "清理重复客户，然后汇总金额。",
+      "method_refs": [
+        "m.dedupe",
+        "m.aggregate"
+      ],
+      "facts": {
+        "fields": [
+          "客户名称",
+          "金额"
+        ],
+        "currency": null,
+        "unit": null,
+        "grain": null,
+        "duplicate_keys": null,
+        "retention": null,
+        "amount_basis": null
+      },
+      "expected": {
+        "plan_status": "needs_clarification",
+        "required_questions": [
+          "对象唯一标识及判重范围？",
+          "重复组怎样保留，顺序怎样确定？",
+          "金额含义、期间、币种、单位？",
+          "按哪些维度汇总，缺失值怎样处理？"
+        ],
+        "forbidden_actions": [
+          "默认按名称去重",
+          "默认保留首条",
+          "默认将空值补零",
+          "直接输出可执行流程"
+        ]
+      },
+      "execution_status": "not_executed"
+    },
+    {
+      "id": "case.conflict",
+      "title": "资料与规则冲突",
+      "request": "把两表同名金额合并求和，不改原数值。",
+      "method_refs": [
+        "m.append",
+        "m.aggregate"
+      ],
+      "facts": {
+        "A": {
+          "currency": "CNY",
+          "unit": "元",
+          "basis": "期末余额"
+        },
+        "B": {
+          "currency": "USD",
+          "unit": "千元",
+          "basis": "本月发生额"
+        },
+        "user_instruction": "直接相加",
+        "professional_framework": null
+      },
+      "expected": {
+        "plan_status": "blocked_for_basis_confirmation",
+        "required_questions": [
+          "最终指标是什么？",
+          "是否分别列示，或按什么依据换算及统一？"
+        ],
+        "required_disclosures": [
+          "币种不同",
+          "单位不同",
+          "存量与流量不同",
+          "适用框架未明确"
+        ],
+        "forbidden_actions": [
+          "默设汇率",
+          "只更名后相加",
+          "将项目要求标为准则要求",
+          "以同名字段证明同口径"
+        ]
+      },
+      "execution_status": "not_executed"
+    }
+  ],
+  "walkthrough_policy": "expected为人工基准；不是AI生成结果，也不证明真实工具已执行",
+  "reserved_capability_policy": "required_capabilities是知识方法需求，未完成节点及端口绑定，不构成生产工具登记表"
+}
